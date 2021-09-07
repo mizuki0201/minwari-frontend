@@ -1,8 +1,8 @@
 import axios from "axios";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { useState } from "react";
-import { useCookies } from "react-cookie";
 import { useHistory } from "react-router-dom";
+import { LoginUserContext } from "../../providers/LoginUserProvider";
 import { Header } from "../organisms/Header";
 
 type Group = {
@@ -13,37 +13,40 @@ type Group = {
 export const Top = () => {
   const [groups, setGroups] = useState<Group[]>([]);
   const history = useHistory();
-  const [userCookies, setCookie, removeCookie] = useCookies(["access-token"]);
-  // useContext
+  const { userCookies } = useContext(LoginUserContext);
 
   useEffect(() => {
-    console.log(userCookies);
     axios
       .get("http://localhost:3001/api/v1/groups", {
-        // access_token: userCookies,
-        headers: {
-          "access-token": "aCyKCRe5ekJLlrPC7wRwzg",
-          client: "xOwRaQeY9ApD-sNKF6Y1oQ",
-          uid: "mail3@gmail.com",
-        },
+        headers: userCookies,
       })
       .then((res) => {
-        // console.log(res.data);
-        setGroups(res.data);
-        // console.log(userCookies);
+        if (res.status === 200) {
+          setGroups(res.data);
+        }
+      })
+      .catch(() => {
+        history.push("/entrance");
       });
   }, []);
 
   const createGroup = () => {
     const responce = axios
-      .post("http://localhost:3001/api/v1/groups", {
-        group: {
-          name: "hoge",
+      .post(
+        "http://localhost:3001/api/v1/groups",
+        {
+          group: {
+            name: "hoge",
+          },
         },
-      })
+        {
+          headers: userCookies,
+        }
+      )
       .then((res) => {
-        if (res.data.status === "success") {
-          history.push("/");
+        console.log(res);
+        if (res.status === 200) {
+          setGroups([...groups, res.data]);
         }
       })
       .catch((e) => console.error(e));
@@ -77,23 +80,27 @@ export const Top = () => {
   };
 
   const deleteGroup = (id: number) => {
-    axios.delete(`http://localhost:3001/api/v1/groups/${id}`).then((res) => {
-      console.log(res);
-    });
+    axios
+      .delete(`http://localhost:3001/api/v1/groups/${id}`, {
+        headers: userCookies,
+      })
+      .then((res) => {
+        console.log(res);
+      });
   };
 
   return (
-    <div>
+    <>
       <Header />
       <p>Topページ</p>
       <button onClick={createGroup}>グループ新規作成</button>
       <button onClick={updateGroup}>グループ更新</button>
       {groups.map((group) => (
-        <div>
-          <p key={group.id}>{group.name}</p>
+        <div key={group.id}>
+          <p>{group.name}</p>
           <button onClick={() => deleteGroup(group.id)}>削除</button>
         </div>
       ))}
-    </div>
+    </>
   );
 };

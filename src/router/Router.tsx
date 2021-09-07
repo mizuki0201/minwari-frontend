@@ -7,10 +7,10 @@ export const Router = () => {
   return (
     <Switch>
       <LoginUserProvider>
-        <Route exact path="/">
+        <Route exact path="/entrance">
           <Entrance />
         </Route>
-        <Route exact path="/groups">
+        <Route exact path="/">
           <Top />
         </Route>
       </LoginUserProvider>

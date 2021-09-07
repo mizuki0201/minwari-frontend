@@ -21,7 +21,7 @@ export const Login = () => {
       setCookie("access-token", headers["access-token"]);
       setCookie("client", headers["client"]);
       setCookie("uid", headers["uid"]);
-      history.push("/groups");
+      history.push("/");
     } else {
       console.log("エラーだお");
     }
