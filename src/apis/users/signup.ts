@@ -22,7 +22,9 @@ export const signup = async (props: Props) => {
       },
     })
     .then((res) => {
-      const { headers, status } = res;
+      console.log(res);
+      const { headers } = res;
+      const { status } = res.data;
       return { headers, status };
     })
     .catch(() => {
