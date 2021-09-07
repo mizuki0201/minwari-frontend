@@ -22,12 +22,14 @@ export const SignUp = () => {
       userId,
       password,
     });
-
+    console.log(headers);
     if (status === 200) {
       setCookie("access-token", headers["access-token"]);
       setCookie("client", headers["client"]);
       setCookie("uid", headers["uid"]);
       history.push("/");
+    } else {
+      alert("ユーザー登録に失敗しました");
     }
   };
 
