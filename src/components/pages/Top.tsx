@@ -11,6 +11,12 @@ import { Header } from "../organisms/Header";
 type Group = {
   id: number;
   name: string;
+  members: [
+    {
+      id: number;
+      name: string;
+    }
+  ];
 };
 
 export const Top = () => {
@@ -35,7 +41,7 @@ export const Top = () => {
       });
   }, []);
 
-  const createGroup = () => {
+  const onClickCreateGroup = () => {
     const responce = axios
       .post(
         "http://localhost:3001/api/v1/groups",
@@ -101,9 +107,14 @@ export const Top = () => {
         <Center py={8} fontSize="2xl" fontWeight="bold">
           グループ一覧
         </Center>
-        <Flex mx={10} py={5} wrap="wrap">
+        <Flex mx={[2, 4, 6, 10]} py={5} wrap="wrap" justify="space-around">
           {groups.map((group) => (
-            <GroupBox key={group.id} id={group.id} name={group.name} />
+            <GroupBox
+              key={group.id}
+              id={group.id}
+              name={group.name}
+              members={group.members}
+            />
           ))}
         </Flex>
       </Box>
@@ -117,6 +128,7 @@ export const Top = () => {
         position="fixed"
         bottom="70px"
         right="70px"
+        onClick={onClickCreateGroup}
       >
         ＋
       </Button>

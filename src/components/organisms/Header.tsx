@@ -31,11 +31,13 @@ export const Header = () => {
         </Heading>
       </Link>
       <Flex>
-        <Link to="/mypage">
-          <Text fontSize="lg" color="white" mr={4}>
-            マイページ
-          </Text>
-        </Link>
+        {/* スマホ版はこのメニューをハンバーガーメニューにする */}
+        <Text fontSize="lg" color="white" mr={4}>
+          友達検索
+        </Text>
+        <Text fontSize="lg" color="white" mr={4}>
+          友達一覧
+        </Text>
         <Text
           fontSize="lg"
           color="white"
