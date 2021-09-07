@@ -1,4 +1,5 @@
-import { Box, Button, Center, Flex, Text } from "@chakra-ui/react";
+import { Box, Button, Center, Flex } from "@chakra-ui/react";
+import { AddIcon } from "@chakra-ui/icons";
 import axios from "axios";
 import { useContext, useEffect } from "react";
 import { useState } from "react";
@@ -130,7 +131,7 @@ export const Top = () => {
         right="70px"
         onClick={onClickCreateGroup}
       >
-        ＋
+        <AddIcon />
       </Button>
     </>
   );

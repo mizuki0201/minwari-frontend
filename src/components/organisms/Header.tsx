@@ -4,6 +4,8 @@ import { Link, useHistory } from "react-router-dom";
 import { LoginUserContext } from "../../providers/LoginUserProvider";
 import { logout } from "../../apis/users/logout";
 import { useContext } from "react";
+import { FriendSearch } from "../molecules/FriendSearch";
+import { FriendsIndex } from "../molecules/FriendsIndex";
 
 export const Header = () => {
   const { userCookies, removeCookie } = useContext(LoginUserContext);
@@ -32,12 +34,8 @@ export const Header = () => {
       </Link>
       <Flex>
         {/* スマホ版はこのメニューをハンバーガーメニューにする */}
-        <Text fontSize="lg" color="white" mr={4}>
-          友達検索
-        </Text>
-        <Text fontSize="lg" color="white" mr={4}>
-          友達一覧
-        </Text>
+        <FriendSearch />
+        <FriendsIndex />
         <Text
           fontSize="lg"
           color="white"
