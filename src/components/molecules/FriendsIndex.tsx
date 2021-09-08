@@ -1,4 +1,5 @@
 import {
+  Flex,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -30,20 +31,58 @@ export const FriendsIndex = () => {
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>友達一覧</ModalHeader>
+          <ModalHeader textAlign="center">友達一覧</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <Tabs isFitted variant="enclosed">
               <TabList mb="1em">
                 <Tab>友達</Tab>
                 <Tab>申請中</Tab>
+                <Tab>受けた申請</Tab>
               </TabList>
               <TabPanels>
                 <TabPanel>
-                  <p>友達！</p>
+                  {/* ある程度のheightになったらスクロールできるようにしたい */}
+                  <Flex align="center" mb={5}>
+                    <Text mr={5} fontSize="xl">
+                      ユーザー1
+                    </Text>
+                    <Text fontSize="sm">@user1ID</Text>
+                  </Flex>
+                  <Flex align="center">
+                    <Text mr={5} fontSize="xl">
+                      ユーザー2
+                    </Text>
+                    <Text fontSize="sm">@user2ID</Text>
+                  </Flex>
                 </TabPanel>
                 <TabPanel>
-                  <p>申請中！</p>
+                  <Flex align="center" mb={5}>
+                    <Text mr={5} fontSize="xl">
+                      ユーザー3
+                    </Text>
+                    <Text fontSize="sm">@user3ID</Text>
+                  </Flex>
+                  <Flex align="center">
+                    <Text mr={5} fontSize="xl">
+                      ユーザー4
+                    </Text>
+                    <Text fontSize="sm">@user4ID</Text>
+                  </Flex>
+                </TabPanel>
+                <TabPanel>
+                  <Flex align="center" mb={5}>
+                    <Text mr={5} fontSize="xl">
+                      ユーザー5
+                    </Text>
+                    <Text fontSize="sm">@user5ID</Text>
+                  </Flex>
+                  <Flex align="center">
+                    <Text mr={5} fontSize="xl">
+                      ユーザー6
+                    </Text>
+                    <Text fontSize="sm">@user6ID</Text>
+                  </Flex>
                 </TabPanel>
               </TabPanels>
             </Tabs>

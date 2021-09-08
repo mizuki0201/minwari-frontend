@@ -24,23 +24,19 @@ export const Top = () => {
   const [groups, setGroups] = useState<Group[]>([]);
   const history = useHistory();
   const { userCookies } = useContext(LoginUserContext);
-  // console.log(groups);
 
   useEffect(() => {
-    // indexGroups({ userCookies });
-    axios
-      .get("http://localhost:3001/api/v1/groups", {
-        headers: userCookies,
-      })
-      .then((res) => {
-        if (res.status === 200) {
-          setGroups(res.data);
-        }
-      })
-      .catch(() => {
-        history.push("/entrance");
-      });
+    getGroups();
   }, []);
+
+  const getGroups = async () => {
+    const result = await indexGroups(userCookies);
+    if (result.status === 200) {
+      setGroups(result.data);
+    } else if (result.status === 302) {
+      history.push("/entrance");
+    }
+  };
 
   const onClickCreateGroup = () => {
     const responce = axios

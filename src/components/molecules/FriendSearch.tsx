@@ -21,6 +21,7 @@ import { useState } from "react";
 export const FriendSearch = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [searchValue, setSearcValue] = useState("");
+  const [searchResult, setSearchResult] = useState([]);
 
   const onChangeSearchValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearcValue(e.target.value);
@@ -45,7 +46,7 @@ export const FriendSearch = () => {
           <ModalHeader textAlign="center">友達検索</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <FormControl id="first-name">
+            <FormControl id="first-name" mb={5}>
               <FormLabel>ユーザーIDで検索</FormLabel>
               <Flex>
                 <Input
