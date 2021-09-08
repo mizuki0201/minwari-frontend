@@ -6,7 +6,7 @@ import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { Login } from "../molecules/Login";
-import { SignUp } from "../molecules/SignUp";
+import { Signup } from "../molecules/Signup";
 
 export const EntranceForm = () => {
   const [loginForm, setLoginForm] = useState(true);
@@ -31,7 +31,7 @@ export const EntranceForm = () => {
     </>
   ) : (
     <>
-      <SignUp />
+      <Signup />
       <Button
         colorScheme="blue"
         variant="link"

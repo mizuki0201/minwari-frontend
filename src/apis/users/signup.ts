@@ -24,10 +24,10 @@ export const signup = async (props: Props) => {
     .then((res) => {
       console.log(res);
       const { headers } = res;
-      const { status } = res.data;
-      return { headers, status };
+      const { status, user } = res.data;
+      return { headers, status, user };
     })
     .catch(() => {
-      return { headers: null, status: 301 };
+      return { headers: null, status: 301, user: {} };
     });
 };

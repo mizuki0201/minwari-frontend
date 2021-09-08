@@ -4,8 +4,9 @@ import { LoginUserContext } from "../../providers/LoginUserProvider";
 import { signup } from "../../apis/users/signup";
 import { FormInput } from "../atoms/FormInput";
 import { useHistory } from "react-router-dom";
+import { login } from "../../apis/users/login";
 
-export const SignUp = () => {
+export const Signup = () => {
   const [name, setName] = useState("");
   const [userId, setUserId] = useState("");
   const [email, setEmail] = useState("");
@@ -14,20 +15,28 @@ export const SignUp = () => {
   const { setCookie } = useContext(LoginUserContext);
   const history = useHistory();
 
+  const afterRegister = async () => {
+    const { headers } = await login({
+      email: email,
+      password: password,
+    });
+    setCookie("access-token", headers["access-token"]);
+    setCookie("client", headers["client"]);
+    setCookie("uid", headers["uid"]);
+    history.push("/");
+  };
+
   const clickOnSignUp = async () => {
-    const { headers, status } = await signup({
+    const { status } = await signup({
       name,
       email,
       phone,
       userId,
       password,
     });
-    console.log(headers);
+
     if (status === 200) {
-      setCookie("access-token", headers["access-token"]);
-      setCookie("client", headers["client"]);
-      setCookie("uid", headers["uid"]);
-      history.push("/");
+      afterRegister();
     } else {
       alert("ユーザー登録に失敗しました");
     }
