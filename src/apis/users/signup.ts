@@ -22,7 +22,6 @@ export const signup = async (props: Props) => {
       },
     })
     .then((res) => {
-      console.log(res);
       const { headers } = res;
       const { status, user } = res.data;
       return { headers, status, user };

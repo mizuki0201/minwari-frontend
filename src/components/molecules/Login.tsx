@@ -16,7 +16,7 @@ export const Login = () => {
       email: email,
       password: password,
     });
-    // console.log(status);
+
     if (status === 200) {
       setCookie("access-token", headers["access-token"]);
       setCookie("client", headers["client"]);

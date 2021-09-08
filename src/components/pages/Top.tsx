@@ -104,7 +104,7 @@ export const Top = () => {
         <Center py={8} fontSize="2xl" fontWeight="bold">
           グループ一覧
         </Center>
-        <Flex mx={[2, 4, 6, 10]} py={5} wrap="wrap" justify="space-around">
+        <Flex mx={[2, 4, 6, 10]} py={5} wrap="wrap" justify="space-between">
           {groups.map((group) => (
             <GroupBox
               key={group.id}
@@ -113,6 +113,8 @@ export const Top = () => {
               members={group.members}
             />
           ))}
+          {/* PC版で1列に2つのカードときに、space-betweenでもきれいに見せるためのダミー */}
+          <Box w={["90%", "40%", "40%", "30%"]} />
         </Flex>
       </Box>
       <Button
