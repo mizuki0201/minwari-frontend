@@ -1,4 +1,7 @@
 import {
+  Box,
+  Button,
+  Divider,
   Flex,
   Modal,
   ModalBody,
@@ -14,9 +17,31 @@ import {
   Text,
   useDisclosure,
 } from "@chakra-ui/react";
+import axios from "axios";
+import { useContext, useState } from "react";
+import { LoginUserContext } from "../../providers/LoginUserProvider";
 
 export const FriendsIndex = () => {
+  const { userCookies } = useContext(LoginUserContext);
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [friends, setFriends] = useState([]);
+
+  const getFriendRequest = async () => {
+    const result = await axios
+      .get("http://localhost:3001/api/v1/friends", {
+        headers: userCookies,
+      })
+      .then((res) => {
+        return res.data;
+      });
+    console.log(result);
+  };
+
+  const onOpenModal = () => {
+    getFriendRequest();
+    onOpen();
+  };
+
   return (
     <>
       <Text
@@ -24,7 +49,7 @@ export const FriendsIndex = () => {
         color="white"
         mr={6}
         cursor="pointer"
-        onClick={onOpen}
+        onClick={onOpenModal}
       >
         友達一覧
       </Text>
@@ -32,61 +57,9 @@ export const FriendsIndex = () => {
         <ModalOverlay />
         <ModalContent>
           <ModalHeader textAlign="center">友達一覧</ModalHeader>
+          <Divider my={[1, 3, 3, 4]} />
           <ModalCloseButton _focus={{ boxShadow: "none" }} />
-          <ModalBody>
-            <Tabs isFitted variant="enclosed">
-              <TabList mb="1em">
-                <Tab _focus={{ boxShadow: "none" }}>友達</Tab>
-                <Tab _focus={{ boxShadow: "none" }}>申請中</Tab>
-                <Tab _focus={{ boxShadow: "none" }}>受けた申請</Tab>
-              </TabList>
-              <TabPanels>
-                <TabPanel>
-                  {/* ある程度のheightになったらスクロールできるようにしたい */}
-                  <Flex align="center" mb={5}>
-                    <Text mr={5} fontSize="xl">
-                      ユーザー1
-                    </Text>
-                    <Text fontSize="sm">@user1ID</Text>
-                  </Flex>
-                  <Flex align="center">
-                    <Text mr={5} fontSize="xl">
-                      ユーザー2
-                    </Text>
-                    <Text fontSize="sm">@user2ID</Text>
-                  </Flex>
-                </TabPanel>
-                <TabPanel>
-                  <Flex align="center" mb={5}>
-                    <Text mr={5} fontSize="xl">
-                      ユーザー3
-                    </Text>
-                    <Text fontSize="sm">@user3ID</Text>
-                  </Flex>
-                  <Flex align="center">
-                    <Text mr={5} fontSize="xl">
-                      ユーザー4
-                    </Text>
-                    <Text fontSize="sm">@user4ID</Text>
-                  </Flex>
-                </TabPanel>
-                <TabPanel>
-                  <Flex align="center" mb={5}>
-                    <Text mr={5} fontSize="xl">
-                      ユーザー5
-                    </Text>
-                    <Text fontSize="sm">@user5ID</Text>
-                  </Flex>
-                  <Flex align="center">
-                    <Text mr={5} fontSize="xl">
-                      ユーザー6
-                    </Text>
-                    <Text fontSize="sm">@user6ID</Text>
-                  </Flex>
-                </TabPanel>
-              </TabPanels>
-            </Tabs>
-          </ModalBody>
+          <ModalBody></ModalBody>
         </ModalContent>
       </Modal>
     </>

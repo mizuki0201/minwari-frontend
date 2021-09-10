@@ -2,6 +2,7 @@ import { SearchIcon } from "@chakra-ui/icons";
 import {
   Box,
   Button,
+  Divider,
   Flex,
   FormControl,
   FormLabel,
@@ -27,7 +28,8 @@ type User = {
 export const FriendSearch = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [keyword, setKeyword] = useState("");
-  const [requested, setRequested] = useState(false);
+  const [added, setAdded] = useState(false);
+  const [friendStatus, setFriendStatus] = useState("");
   const [searchResult, setSearchResult] = useState<User>({});
   const { userCookies } = useContext(LoginUserContext);
 
@@ -46,15 +48,27 @@ export const FriendSearch = () => {
       .then((res) => {
         return res.data;
       });
-    setSearchResult(result.data);
+
+    if (result.status === 200) {
+      setSearchResult(result.data);
+      setAdded(false);
+    } else if (result.status === 301) {
+      setSearchResult(result.data);
+      setFriendStatus("すでに友達です");
+      setAdded(true);
+    } else {
+      setSearchResult({});
+      setFriendStatus("");
+      setAdded(false);
+    }
   };
 
-  const friendRequest = async (to_id?: number) => {
+  const addFriend = async (to_id?: number) => {
     const result = await axios
       .post(
-        "http://localhost:3001/api/v1/friend_requests",
+        "http://localhost:3001/api/v1/friends",
         {
-          friend_request: {
+          friend: {
             to_id,
           },
         },
@@ -64,8 +78,9 @@ export const FriendSearch = () => {
         return res.data;
       });
 
-    if (result.status === 200 || result.status === 302) {
-      setRequested(true);
+    if (result.status === 200) {
+      setFriendStatus("追加済み");
+      setAdded(true);
     }
   };
 
@@ -89,6 +104,7 @@ export const FriendSearch = () => {
         <ModalOverlay />
         <ModalContent>
           <ModalHeader textAlign="center">友達検索</ModalHeader>
+          <Divider my={[1, 3, 3, 4]} />
           <ModalCloseButton _focus={{ boxShadow: "none" }} />
           <ModalBody>
             <FormControl id="first-name" mb={5}>
@@ -111,19 +127,20 @@ export const FriendSearch = () => {
                 {"name" in searchResult ? (
                   <Flex align="center" justify="space-between">
                     <Text fontSize="lg">{searchResult.name}</Text>
-                    {requested ? (
-                      <Box>申請済み</Box>
+                    {added ? (
+                      <Box>{friendStatus}</Box>
                     ) : (
                       <Button
                         colorScheme="blue"
-                        onClick={() => friendRequest(searchResult.id)}
+                        _focus={{ boxShadow: "none" }}
+                        onClick={() => addFriend(searchResult.id)}
                       >
-                        友達申請する
+                        友達追加
                       </Button>
                     )}
                   </Flex>
                 ) : (
-                  <Text>ユーザーが見つかりません</Text>
+                  <></>
                 )}
               </Box>
             </FormControl>
