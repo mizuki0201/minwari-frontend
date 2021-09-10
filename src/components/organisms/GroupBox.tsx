@@ -35,7 +35,7 @@ export const GroupBox = (props: Props) => {
       <Text>
         メンバー：
         {members?.map((member) => (
-          <Text key={member.id} display="inline">
+          <Text key={member.id} display="inline" mr={2}>
             {member.name}
           </Text>
         ))}

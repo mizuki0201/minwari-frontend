@@ -1,6 +1,4 @@
 import {
-  Box,
-  Button,
   Divider,
   Flex,
   Modal,
@@ -17,6 +15,7 @@ import { useContext, useState } from "react";
 import { LoginUserContext } from "../../providers/LoginUserProvider";
 
 type Friend = {
+  id: number;
   user_id: string;
   name: string;
 };

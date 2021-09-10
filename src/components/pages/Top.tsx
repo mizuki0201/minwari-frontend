@@ -1,6 +1,4 @@
-import { Box, Button, Center, Flex } from "@chakra-ui/react";
-import { AddIcon } from "@chakra-ui/icons";
-import axios from "axios";
+import { Box, Center, Flex } from "@chakra-ui/react";
 import { useContext, useEffect } from "react";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
@@ -8,6 +6,7 @@ import { indexGroups } from "../../apis/groups/indexGroups";
 import { LoginUserContext } from "../../providers/LoginUserProvider";
 import { GroupBox } from "../organisms/GroupBox";
 import { Header } from "../organisms/Header";
+import { GroupCreate } from "../molecules/GroupCreate";
 
 type Group = {
   id: number;
@@ -38,65 +37,6 @@ export const Top = () => {
     }
   };
 
-  const onClickCreateGroup = () => {
-    const responce = axios
-      .post(
-        "http://localhost:3001/api/v1/groups",
-        {
-          group: {
-            name: "hoge",
-          },
-        },
-        {
-          headers: userCookies,
-        }
-      )
-      .then((res) => {
-        console.log(res);
-        if (res.status === 200) {
-          setGroups([...groups, res.data]);
-        }
-      })
-      .catch((e) => console.error(e));
-
-    return responce;
-  };
-
-  // const updateGroup = () => {
-  //   const responce = axios
-  //     .put("http://localhost:3001/api/v1/groups/1", {
-  //       group: {
-  //         id: 1,
-  //         name: "updated",
-  //         // name: "hoge"
-  //       },
-  //     })
-  //     .then((res) => {
-  //       console.log(res);
-  //       const updatedData = res.data;
-  //       const newGroups = groups.map((group) => {
-  //         if (group.id === updatedData.id) {
-  //           group.name = updatedData.name;
-  //         }
-  //         return group;
-  //       });
-  //       setGroups(newGroups);
-  //     })
-  //     .catch((e) => console.error(e));
-
-  //   return responce;
-  // };
-
-  // const deleteGroup = (id: number) => {
-  //   axios
-  //     .delete(`http://localhost:3001/api/v1/groups/${id}`, {
-  //       headers: userCookies,
-  //     })
-  //     .then((res) => {
-  //       console.log(res);
-  //     });
-  // };
-
   return (
     <>
       <Header />
@@ -117,21 +57,7 @@ export const Top = () => {
           <Box w={["90%", "40%", "40%", "30%"]} />
         </Flex>
       </Box>
-      <Button
-        w="90px"
-        h="90px"
-        colorScheme="blue"
-        color="white"
-        fontSize="4xl"
-        borderRadius="full"
-        position="fixed"
-        bottom="70px"
-        right="70px"
-        _focus={{ boxShadow: "none" }}
-        onClick={onClickCreateGroup}
-      >
-        <AddIcon />
-      </Button>
+      <GroupCreate groups={groups} setGroups={setGroups} />
     </>
   );
 };
