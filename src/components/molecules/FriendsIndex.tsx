@@ -9,11 +9,6 @@ import {
   ModalContent,
   ModalHeader,
   ModalOverlay,
-  Tab,
-  TabList,
-  TabPanel,
-  TabPanels,
-  Tabs,
   Text,
   useDisclosure,
 } from "@chakra-ui/react";
@@ -21,10 +16,14 @@ import axios from "axios";
 import { useContext, useState } from "react";
 import { LoginUserContext } from "../../providers/LoginUserProvider";
 
+type Friend = {
+  user_id: string;
+  name: string;
+};
 export const FriendsIndex = () => {
   const { userCookies } = useContext(LoginUserContext);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [friends, setFriends] = useState([]);
+  const [friends, setFriends] = useState<Friend[]>([]);
 
   const getFriendRequest = async () => {
     const result = await axios
@@ -34,7 +33,7 @@ export const FriendsIndex = () => {
       .then((res) => {
         return res.data;
       });
-    console.log(result);
+    setFriends(result);
   };
 
   const onOpenModal = () => {
@@ -59,7 +58,16 @@ export const FriendsIndex = () => {
           <ModalHeader textAlign="center">友達一覧</ModalHeader>
           <Divider my={[1, 3, 3, 4]} />
           <ModalCloseButton _focus={{ boxShadow: "none" }} />
-          <ModalBody></ModalBody>
+          <ModalBody>
+            {friends.map((friend, i) => (
+              <Flex key={i} align="center" mb={3}>
+                <Text fontSize="lg" mr={3}>
+                  {friend.name}
+                </Text>
+                <Text fontSize="sm">@{friend.user_id}</Text>
+              </Flex>
+            ))}
+          </ModalBody>
         </ModalContent>
       </Modal>
     </>
