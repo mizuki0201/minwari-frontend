@@ -27,6 +27,7 @@ type User = {
 export const FriendSearch = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [keyword, setKeyword] = useState("");
+  const [requested, setRequested] = useState(false);
   const [searchResult, setSearchResult] = useState<User>({});
   const { userCookies } = useContext(LoginUserContext);
 
@@ -45,10 +46,34 @@ export const FriendSearch = () => {
       .then((res) => {
         return res.data;
       });
-    console.log(result.data);
     setSearchResult(result.data);
   };
 
+  const friendRequest = async (to_id?: number) => {
+    const result = await axios
+      .post(
+        "http://localhost:3001/api/v1/friend_requests",
+        {
+          friend_request: {
+            to_id,
+          },
+        },
+        { headers: userCookies }
+      )
+      .then((res) => {
+        return res.data;
+      });
+
+    if (result.status === 200 || result.status === 302) {
+      setRequested(true);
+    }
+  };
+
+  const onCloseModal = () => {
+    onClose();
+    setKeyword("");
+    setSearchResult({});
+  };
   return (
     <>
       <Text
@@ -60,7 +85,7 @@ export const FriendSearch = () => {
       >
         友達検索
       </Text>
-      <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal isOpen={isOpen} onClose={onCloseModal}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader textAlign="center">友達検索</ModalHeader>
@@ -78,11 +103,23 @@ export const FriendSearch = () => {
                   <SearchIcon onClick={onClickSearch} />
                 </Button>
               </Flex>
-              <Box>
+              <Box my={7}>
                 {"name" in searchResult ? (
-                  <p>{searchResult.name}</p>
+                  <Flex align="center" justify="space-between">
+                    <Text fontSize="lg">{searchResult.name}</Text>
+                    {requested ? (
+                      <Box>申請済み</Box>
+                    ) : (
+                      <Button
+                        colorScheme="blue"
+                        onClick={() => friendRequest(searchResult.id)}
+                      >
+                        友達申請する
+                      </Button>
+                    )}
+                  </Flex>
                 ) : (
-                  <p>ユーザーが見つかりません</p>
+                  <Text>ユーザーが見つかりません</Text>
                 )}
               </Box>
             </FormControl>
