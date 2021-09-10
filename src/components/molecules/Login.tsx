@@ -45,7 +45,11 @@ export const Login = () => {
         onChange={setPassword}
         placeholder="パスワードを入力してください"
       />
-      <Button colorScheme="blue" onClick={clickOnLogin}>
+      <Button
+        colorScheme="blue"
+        onClick={clickOnLogin}
+        _focus={{ boxShadow: "none" }}
+      >
         ログイン
       </Button>
     </>

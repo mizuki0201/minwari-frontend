@@ -84,7 +84,11 @@ export const Signup = () => {
         onChange={setPassword}
         placeholder="パスワードを入力してください"
       />
-      <Button colorScheme="blue" onClick={clickOnSignUp}>
+      <Button
+        colorScheme="blue"
+        _focus={{ boxShadow: "none" }}
+        onClick={clickOnSignUp}
+      >
         新規登録
       </Button>
     </>

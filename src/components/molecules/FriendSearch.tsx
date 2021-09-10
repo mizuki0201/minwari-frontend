@@ -89,7 +89,7 @@ export const FriendSearch = () => {
         <ModalOverlay />
         <ModalContent>
           <ModalHeader textAlign="center">友達検索</ModalHeader>
-          <ModalCloseButton />
+          <ModalCloseButton _focus={{ boxShadow: "none" }} />
           <ModalBody>
             <FormControl id="first-name" mb={5}>
               <FormLabel>ユーザーIDで検索</FormLabel>
@@ -99,7 +99,11 @@ export const FriendSearch = () => {
                   onChange={(e) => onChangeSearchValue(e)}
                   placeholder="ユーザーIDを入力してください"
                 />
-                <Button ml={3} colorScheme="blue">
+                <Button
+                  ml={3}
+                  colorScheme="blue"
+                  _focus={{ boxShadow: "none" }}
+                >
                   <SearchIcon onClick={onClickSearch} />
                 </Button>
               </Flex>

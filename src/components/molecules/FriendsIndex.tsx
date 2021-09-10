@@ -32,13 +32,13 @@ export const FriendsIndex = () => {
         <ModalOverlay />
         <ModalContent>
           <ModalHeader textAlign="center">友達一覧</ModalHeader>
-          <ModalCloseButton />
+          <ModalCloseButton _focus={{ boxShadow: "none" }} />
           <ModalBody>
             <Tabs isFitted variant="enclosed">
               <TabList mb="1em">
-                <Tab>友達</Tab>
-                <Tab>申請中</Tab>
-                <Tab>受けた申請</Tab>
+                <Tab _focus={{ boxShadow: "none" }}>友達</Tab>
+                <Tab _focus={{ boxShadow: "none" }}>申請中</Tab>
+                <Tab _focus={{ boxShadow: "none" }}>受けた申請</Tab>
               </TabList>
               <TabPanels>
                 <TabPanel>

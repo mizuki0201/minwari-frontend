@@ -127,6 +127,7 @@ export const Top = () => {
         position="fixed"
         bottom="70px"
         right="70px"
+        _focus={{ boxShadow: "none" }}
         onClick={onClickCreateGroup}
       >
         <AddIcon />
