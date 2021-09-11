@@ -5,7 +5,9 @@ import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { LoginUserContext } from "../../providers/LoginUserProvider";
+import { EditButton } from "../atoms/EditButton";
 import { EventCreate } from "../molecules/EventCreate";
+import { GroupUpdate } from "../molecules/GroupUpdate";
 import { EventBox } from "../organisms/EventBox";
 import { Header } from "../organisms/Header";
 
@@ -62,14 +64,7 @@ export const EventsIndex = () => {
             <Text fontSize="xl" fontWeight="bold">
               {group.name}
             </Text>
-            <Button
-              colorScheme="blue"
-              p={2}
-              fontSize="xl"
-              _focus={{ boxShadow: "none" }}
-            >
-              <SettingsIcon />
-            </Button>
+            <GroupUpdate group={group} setGroup={setGroup} />
           </Flex>
           <Divider my={[1, 3, 3, 4]} />
           <Box py={3}>
@@ -96,7 +91,7 @@ export const EventsIndex = () => {
             イベント一覧
           </Center>
           {events.map((event) => (
-            <EventBox event={event} />
+            <EventBox key={event.id} event={event} />
           ))}
         </Box>
       </Flex>

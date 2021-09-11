@@ -12,7 +12,6 @@ export const EventBox = (props: Props) => {
   const { event } = props;
   return (
     <Box
-      key={event.id}
       bg="white"
       w="75%"
       ml="auto"
