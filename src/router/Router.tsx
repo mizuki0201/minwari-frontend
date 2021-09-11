@@ -1,6 +1,6 @@
 import { Route, Switch } from "react-router-dom";
 import { Entrance } from "../components/pages/Entrance";
-import { Group } from "../components/pages/Group";
+import { EventsIndex } from "../components/pages/EventsIndex";
 import { Top } from "../components/pages/Top";
 import { LoginUserProvider } from "../providers/LoginUserProvider";
 
@@ -15,7 +15,7 @@ export const Router = () => {
           <Top />
         </Route>
         <Route path="/groups/:group_id/events">
-          <Group />
+          <EventsIndex />
         </Route>
       </LoginUserProvider>
     </Switch>
