@@ -1,4 +1,5 @@
 import { Box, Text } from "@chakra-ui/react";
+import { useHistory } from "react-router";
 
 type Props = {
   id: number;
@@ -13,9 +14,10 @@ type Props = {
 
 export const GroupBox = (props: Props) => {
   const { id, name, members } = props;
+  const history = useHistory();
+
   const onClickGroup = () => {
-    // グループ詳細取得 && 詳細ページへ遷移する
-    console.log("はにゃ？");
+    history.push(`/groups/${id}/events`);
   };
 
   return (
@@ -27,6 +29,7 @@ export const GroupBox = (props: Props) => {
       py={5}
       borderRadius="md"
       shadow="md"
+      cursor="pointer"
       onClick={onClickGroup}
     >
       <Text mb={2} fontSize="lg" fontWeight="bold">

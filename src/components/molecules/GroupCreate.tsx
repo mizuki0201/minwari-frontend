@@ -2,7 +2,6 @@ import { Button } from "@chakra-ui/button";
 import { Checkbox, CheckboxGroup } from "@chakra-ui/checkbox";
 import { FormControl, FormLabel } from "@chakra-ui/form-control";
 import { useDisclosure } from "@chakra-ui/hooks";
-import { AddIcon } from "@chakra-ui/icons";
 import { Divider, Flex } from "@chakra-ui/layout";
 import {
   Modal,
@@ -14,7 +13,9 @@ import {
 } from "@chakra-ui/modal";
 import axios from "axios";
 import { useContext, useState } from "react";
+import { createGroup } from "../../apis/groups/createGroup";
 import { LoginUserContext } from "../../providers/LoginUserProvider";
+import { CreateButton } from "../atoms/CreateButton";
 import { FormInput } from "../atoms/FormInput";
 
 type Friend = {
@@ -77,45 +78,16 @@ export const GroupCreate = (props: Props) => {
     }
   };
 
-  const createGroup = () => {
-    const result = axios
-      .post(
-        "http://localhost:3001/api/v1/groups",
-        {
-          group: {
-            name: name,
-            user_ids: checkedUser,
-          },
-        },
-        {
-          headers: userCookies,
-        }
-      )
-      .then((res) => {
-        setGroups([...groups, res.data]);
-      })
-      .catch((e) => console.error(e));
+  const onClickCreateGroup = async () => {
+    const result = await createGroup({ name, checkedUser, userCookies });
+    setGroups([...groups, result]);
 
     onCloseModal();
   };
 
   return (
     <>
-      <Button
-        w="90px"
-        h="90px"
-        colorScheme="blue"
-        color="white"
-        fontSize="4xl"
-        borderRadius="full"
-        position="fixed"
-        bottom="70px"
-        right="70px"
-        _focus={{ boxShadow: "none" }}
-        onClick={onOpenModal}
-      >
-        <AddIcon />
-      </Button>
+      <CreateButton onClick={onOpenModal} />
       <Modal isOpen={isOpen} onClose={onCloseModal}>
         <ModalOverlay />
         <ModalContent>
@@ -148,7 +120,7 @@ export const GroupCreate = (props: Props) => {
                 </Flex>
               </CheckboxGroup>
             </FormControl>
-            <Button colorScheme="blue" mb={5} onClick={createGroup}>
+            <Button colorScheme="blue" mb={5} onClick={onClickCreateGroup}>
               グループ作成
             </Button>
           </ModalBody>
