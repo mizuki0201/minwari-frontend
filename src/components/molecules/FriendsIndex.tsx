@@ -10,8 +10,8 @@ import {
   Text,
   useDisclosure,
 } from "@chakra-ui/react";
-import axios from "axios";
 import { useContext, useState } from "react";
+import { indexFriends } from "../../apis/friends/indexFriends";
 import { LoginUserContext } from "../../providers/LoginUserProvider";
 import { Friend } from "../../types/types";
 
@@ -20,19 +20,13 @@ export const FriendsIndex = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [friends, setFriends] = useState<Friend[]>([]);
 
-  const getFriendRequest = async () => {
-    const result = await axios
-      .get("http://localhost:3001/api/v1/friends", {
-        headers: userCookies,
-      })
-      .then((res) => {
-        return res.data;
-      });
+  const getFriends = async () => {
+    const result = await indexFriends(userCookies);
     setFriends(result);
   };
 
   const onOpenModal = () => {
-    getFriendRequest();
+    getFriends();
     onOpen();
   };
 

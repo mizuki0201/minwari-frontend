@@ -2,6 +2,7 @@ import { Box, Center, Divider, Flex, Text } from "@chakra-ui/layout";
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router";
+import { indexExpences } from "../../apis/expences/indexExpence";
 import { LoginUserContext } from "../../providers/LoginUserProvider";
 import { Event, Expence, Member } from "../../types/types";
 import { EventUpdate } from "../molecules/EventUpdate";
@@ -22,16 +23,11 @@ export const ExpenceIndex = () => {
   const [members, setMembers] = useState<Member[]>([]);
 
   const getEventAndExpence = async () => {
-    const result = await axios
-      .get(
-        `http://localhost:3001/api/v1/groups/${group_id}/events/${event_id}/expences`,
-        {
-          headers: userCookies,
-        }
-      )
-      .then((res) => {
-        return res.data;
-      });
+    const result = await indexExpences({
+      groupId: group_id,
+      eventId: event_id,
+      userCookies,
+    });
 
     setEvent(result.event);
     setExpences(result.expences);

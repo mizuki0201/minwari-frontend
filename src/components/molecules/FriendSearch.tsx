@@ -16,8 +16,9 @@ import {
   Text,
   useDisclosure,
 } from "@chakra-ui/react";
-import axios from "axios";
 import { useContext, useState } from "react";
+import { createFriend } from "../../apis/friends/createFriend";
+import { searchFriend } from "../../apis/friends/searchFriend";
 import { LoginUserContext } from "../../providers/LoginUserProvider";
 
 type User = {
@@ -38,16 +39,10 @@ export const FriendSearch = () => {
   };
 
   const onClickSearch = async () => {
-    const result = await axios
-      .get("http://localhost:3001/api/v1/users", {
-        params: {
-          keyword: keyword,
-        },
-        headers: userCookies,
-      })
-      .then((res) => {
-        return res.data;
-      });
+    const result = await searchFriend({
+      keyword,
+      userCookies,
+    });
 
     if (result.status === 200) {
       setSearchResult(result.data);
@@ -64,19 +59,7 @@ export const FriendSearch = () => {
   };
 
   const addFriend = async (to_id?: number) => {
-    const result = await axios
-      .post(
-        "http://localhost:3001/api/v1/friends",
-        {
-          friend: {
-            to_id,
-          },
-        },
-        { headers: userCookies }
-      )
-      .then((res) => {
-        return res.data;
-      });
+    const result = await createFriend({ to_id, userCookies });
 
     if (result.status === 200) {
       setFriendStatus("追加済み");

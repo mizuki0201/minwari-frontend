@@ -11,8 +11,8 @@ import {
   ModalOverlay,
 } from "@chakra-ui/modal";
 import { Radio, RadioGroup } from "@chakra-ui/radio";
-import axios from "axios";
 import { useContext, useState } from "react";
+import { createExpence } from "../../apis/expences/createExpence";
 import { LoginUserContext } from "../../providers/LoginUserProvider";
 import { Expence, Member } from "../../types/types";
 import { CreateButton } from "../atoms/CreateButton";
@@ -44,25 +44,15 @@ export const ExpenceCreate = (props: Props) => {
   };
 
   const onClickCreateExpence = async () => {
-    const result = await axios
-      .post(
-        `http://localhost:3001/api/v1/groups/${groupId}/events/${eventId}/expences`,
-        {
-          expence: {
-            title: title,
-            description: description,
-            price: price,
-            event_id: eventId,
-            user_id: selectedUser,
-          },
-        },
-        {
-          headers: userCookies,
-        }
-      )
-      .then((res) => {
-        return res.data;
-      });
+    const result = await createExpence({
+      title,
+      description,
+      price,
+      eventId,
+      selectedUser,
+      groupId,
+      userCookies,
+    });
 
     setExpences([...expences, result]);
     onCloseModal();

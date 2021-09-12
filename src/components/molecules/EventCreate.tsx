@@ -9,8 +9,8 @@ import {
   ModalHeader,
   ModalOverlay,
 } from "@chakra-ui/modal";
-import axios from "axios";
 import { useContext, useState } from "react";
+import { createEvent } from "../../apis/events/createEvent";
 import { LoginUserContext } from "../../providers/LoginUserProvider";
 import { Event, Group } from "../../types/types";
 import { CreateButton } from "../atoms/CreateButton";
@@ -37,22 +37,12 @@ export const EventCreate = (props: Props) => {
   };
 
   const onClickCreateEvent = async () => {
-    const result = await axios
-      .post(
-        `http://localhost:3001/api/v1/groups/${group.id}/events`,
-        {
-          event: {
-            title: title,
-            description: description,
-          },
-        },
-        {
-          headers: userCookies,
-        }
-      )
-      .then((res) => {
-        return res.data;
-      });
+    const result = await createEvent({
+      groupId: group.id,
+      title: title,
+      description: description,
+      userCookies: userCookies,
+    });
 
     setEvents([...events, result]);
     onCloseModal();

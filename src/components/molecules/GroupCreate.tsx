@@ -11,8 +11,8 @@ import {
   ModalHeader,
   ModalOverlay,
 } from "@chakra-ui/modal";
-import axios from "axios";
 import { useContext, useState } from "react";
+import { indexFriends } from "../../apis/friends/indexFriends";
 import { createGroup } from "../../apis/groups/createGroup";
 import { LoginUserContext } from "../../providers/LoginUserProvider";
 import { Friend, Group } from "../../types/types";
@@ -34,13 +34,7 @@ export const GroupCreate = (props: Props) => {
 
   const onOpenModal = async () => {
     onOpen();
-    const result = await axios
-      .get("http://localhost:3001/api/v1/friends", {
-        headers: userCookies,
-      })
-      .then((res) => {
-        return res.data;
-      });
+    const result = await indexFriends(userCookies);
     setFriends(result);
   };
 

@@ -1,7 +1,7 @@
 import { Box, Center, Divider, Flex, Text } from "@chakra-ui/layout";
-import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router";
+import { indexEvents } from "../../apis/events/indexEvents";
 import { LoginUserContext } from "../../providers/LoginUserProvider";
 import { Event, Group } from "../../types/types";
 import { EventCreate } from "../molecules/EventCreate";
@@ -20,13 +20,7 @@ export const EventsIndex = () => {
   const [events, setEvents] = useState<Event[]>([]);
 
   const getGroupAndEvents = async () => {
-    const result = await axios
-      .get(`http://localhost:3001/api/v1/groups/${group_id}/events`, {
-        headers: userCookies,
-      })
-      .then((res) => {
-        return res.data;
-      });
+    const result = await indexEvents({ groupId: group_id, userCookies });
 
     setGroup(result.group);
     setEvents(result.events);
