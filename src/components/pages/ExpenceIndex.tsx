@@ -4,6 +4,8 @@ import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { LoginUserContext } from "../../providers/LoginUserProvider";
 import { EventUpdate } from "../molecules/EventUpdate";
+import { ExpenceCreate } from "../molecules/ExpenceCreate";
+import { ExpenceBox } from "../organisms/ExpenceBox";
 import { Header } from "../organisms/Header";
 
 type Params = {
@@ -26,11 +28,17 @@ type Expence = {
   user_id: number;
 };
 
+type Members = {
+  id: number;
+  name: string;
+};
+
 export const ExpenceIndex = () => {
   const { group_id, event_id } = useParams<Params>();
   const { userCookies } = useContext(LoginUserContext);
   const [event, setEvent] = useState<Event>({} as Event);
   const [expences, setExpences] = useState<Expence[]>([]);
+  const [members, setMembers] = useState<Members[]>([]);
 
   const getEventAndExpence = async () => {
     const result = await axios
@@ -43,9 +51,10 @@ export const ExpenceIndex = () => {
       .then((res) => {
         return res.data;
       });
-    console.log(result);
+
     setEvent(result.event);
     setExpences(result.expences);
+    setMembers(result.members);
   };
 
   useEffect(() => {
@@ -81,17 +90,17 @@ export const ExpenceIndex = () => {
                 イベント合計の割り勘額
               </Center>
               <Box py={4} px={8}>
-                {/* {group.members?.map((member) => (
-                <Flex
-                  key={member.id}
-                  my={2}
-                  fontSize="lg"
-                  justify="space-between"
-                >
-                  <Text>{member.name}</Text>
-                  <Text>200円</Text>
-                </Flex>
-              ))} */}
+                {members.map((member) => (
+                  <Flex
+                    key={member.id}
+                    my={2}
+                    fontSize="lg"
+                    justify="space-between"
+                  >
+                    <Text>{member.name}</Text>
+                    <Text>200円</Text>
+                  </Flex>
+                ))}
               </Box>
             </Box>
           </Box>
@@ -99,12 +108,19 @@ export const ExpenceIndex = () => {
             <Center fontSize="xl" fontWeight="bold">
               支出一覧
             </Center>
-            {/* {events.map((event) => (
-            <EventBox key={event.id} event={event} groupId={group_id} />
-          ))} */}
+            {expences.map((expence) => (
+              <ExpenceBox key={expence.id} expence={expence} />
+            ))}
           </Box>
         </Flex>
       </Box>
+      <ExpenceCreate
+        groupId={group_id}
+        eventId={event_id}
+        expences={expences}
+        setExpences={setExpences}
+        members={members}
+      />
     </>
   );
 };

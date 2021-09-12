@@ -66,7 +66,7 @@ export const GroupCreate = (props: Props) => {
     setCheckedUser([]);
   };
 
-  const selsectUser = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const selectUser = (e: React.ChangeEvent<HTMLInputElement>) => {
     const checkedUserId = e.target.value;
     if (e.target.checked) {
       setCheckedUser([...checkedUser, checkedUserId]);
@@ -112,7 +112,7 @@ export const GroupCreate = (props: Props) => {
                       key={i}
                       value={`${friend.id}`}
                       mx={2}
-                      onChange={(e) => selsectUser(e)}
+                      onChange={(e) => selectUser(e)}
                     >
                       {friend.name}
                     </Checkbox>
