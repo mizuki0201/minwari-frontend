@@ -1,4 +1,5 @@
 import { Box, Flex, Text } from "@chakra-ui/layout";
+import { useHistory } from "react-router";
 
 type Props = {
   event: {
@@ -6,10 +7,17 @@ type Props = {
     title: string;
     description: string;
   };
+  groupId: string;
 };
 
 export const EventBox = (props: Props) => {
-  const { event } = props;
+  const { event, groupId } = props;
+  const history = useHistory();
+
+  const onClickToExpenceIndex = () => {
+    history.push(`/groups/${groupId}/events/${event.id}`);
+  };
+
   return (
     <Box
       bg="white"
@@ -22,6 +30,7 @@ export const EventBox = (props: Props) => {
       borderRadius="md"
       shadow="md"
       cursor="pointer"
+      onClick={onClickToExpenceIndex}
     >
       <Flex justify="space-between" fontSize="lg" mb={2}>
         <Text fontWeight="bold">{event.title}</Text>

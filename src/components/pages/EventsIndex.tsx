@@ -1,11 +1,8 @@
-import { Button } from "@chakra-ui/button";
-import { SettingsIcon } from "@chakra-ui/icons";
 import { Box, Center, Divider, Flex, Text } from "@chakra-ui/layout";
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { LoginUserContext } from "../../providers/LoginUserProvider";
-import { EditButton } from "../atoms/EditButton";
 import { EventCreate } from "../molecules/EventCreate";
 import { GroupUpdate } from "../molecules/GroupUpdate";
 import { EventBox } from "../organisms/EventBox";
@@ -69,7 +66,7 @@ export const EventsIndex = () => {
           <Divider my={[1, 3, 3, 4]} />
           <Box py={3}>
             <Center fontSize="lg" fontWeight="bold">
-              合計割り勘額
+              グループ合計の割り勘額
             </Center>
             <Box py={4} px={8}>
               {group.members?.map((member) => (
@@ -91,7 +88,7 @@ export const EventsIndex = () => {
             イベント一覧
           </Center>
           {events.map((event) => (
-            <EventBox key={event.id} event={event} />
+            <EventBox key={event.id} event={event} groupId={group_id} />
           ))}
         </Box>
       </Flex>

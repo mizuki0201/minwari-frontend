@@ -16,7 +16,7 @@ export const GroupBox = (props: Props) => {
   const { id, name, members } = props;
   const history = useHistory();
 
-  const onClickGroup = () => {
+  const onClickToEventIndex = () => {
     history.push(`/groups/${id}/events`);
   };
 
@@ -30,7 +30,7 @@ export const GroupBox = (props: Props) => {
       borderRadius="md"
       shadow="md"
       cursor="pointer"
-      onClick={onClickGroup}
+      onClick={onClickToEventIndex}
     >
       <Text mb={2} fontSize="lg" fontWeight="bold">
         {name}
