@@ -1,15 +1,9 @@
 import { Button } from "@chakra-ui/button";
 import { Box, Divider, Flex, Text } from "@chakra-ui/layout";
+import { Expence } from "../../types/types";
 
 type Props = {
-  expence: {
-    id: number;
-    title: string;
-    description: string;
-    price: number;
-    event_id: number;
-    user_id: number;
-  };
+  expence: Expence;
 };
 
 export const ExpenceBox = (props: Props) => {

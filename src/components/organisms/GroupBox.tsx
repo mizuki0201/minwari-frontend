@@ -1,18 +1,8 @@
 import { Box, Text } from "@chakra-ui/react";
 import { useHistory } from "react-router";
+import { Group } from "../../types/types";
 
-type Props = {
-  id: number;
-  name: string;
-  members: [
-    {
-      id: number;
-      name: string;
-    }
-  ];
-};
-
-export const GroupBox = (props: Props) => {
+export const GroupBox = (props: Group) => {
   const { id, name, members } = props;
   const history = useHistory();
 

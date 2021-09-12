@@ -3,6 +3,7 @@ import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { LoginUserContext } from "../../providers/LoginUserProvider";
+import { Event, Group } from "../../types/types";
 import { EventCreate } from "../molecules/EventCreate";
 import { GroupUpdate } from "../molecules/GroupUpdate";
 import { EventBox } from "../organisms/EventBox";
@@ -10,23 +11,6 @@ import { Header } from "../organisms/Header";
 
 type Params = {
   group_id: string;
-};
-
-type Group = {
-  id: number;
-  name: string;
-  members: [
-    {
-      id: number;
-      name: string;
-    }
-  ];
-};
-
-type Event = {
-  id: number;
-  title: string;
-  description: string;
 };
 
 export const EventsIndex = () => {

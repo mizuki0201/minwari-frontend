@@ -15,25 +15,9 @@ import axios from "axios";
 import { useContext, useState } from "react";
 import { createGroup } from "../../apis/groups/createGroup";
 import { LoginUserContext } from "../../providers/LoginUserProvider";
+import { Friend, Group } from "../../types/types";
 import { CreateButton } from "../atoms/CreateButton";
 import { FormInput } from "../atoms/FormInput";
-
-type Friend = {
-  id: number;
-  user_id: string;
-  name: string;
-};
-
-type Group = {
-  id: number;
-  name: string;
-  members: [
-    {
-      id: number;
-      name: string;
-    }
-  ];
-};
 
 type Props = {
   groups: Group[];

@@ -1,12 +1,7 @@
 import axios from "axios";
+import { UserCookie } from "../../types/types";
 
-type Props = {
-  "access-token"?: string;
-  client?: string;
-  uid?: string;
-};
-
-export const indexGroups = async (userCookies: Props | undefined) => {
+export const indexGroups = async (userCookies: UserCookie | undefined) => {
   return await axios
     .get("http://localhost:3001/api/v1/groups", {
       headers: userCookies,

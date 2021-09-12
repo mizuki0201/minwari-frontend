@@ -12,14 +12,9 @@ import {
 import { useContext, useState } from "react";
 import { updateEvent } from "../../apis/events/updateEvent";
 import { LoginUserContext } from "../../providers/LoginUserProvider";
+import { Event } from "../../types/types";
 import { EditButton } from "../atoms/EditButton";
 import { FormInput } from "../atoms/FormInput";
-
-type Event = {
-  id: number;
-  title: string;
-  description: string;
-};
 
 type Props = {
   groupId: string;

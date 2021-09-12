@@ -3,6 +3,7 @@ import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { LoginUserContext } from "../../providers/LoginUserProvider";
+import { Event, Expence, Member } from "../../types/types";
 import { EventUpdate } from "../molecules/EventUpdate";
 import { ExpenceCreate } from "../molecules/ExpenceCreate";
 import { ExpenceBox } from "../organisms/ExpenceBox";
@@ -13,32 +14,12 @@ type Params = {
   event_id: string;
 };
 
-type Event = {
-  id: number;
-  title: string;
-  description: string;
-};
-
-type Expence = {
-  id: number;
-  title: string;
-  description: string;
-  price: number;
-  event_id: number;
-  user_id: number;
-};
-
-type Members = {
-  id: number;
-  name: string;
-};
-
 export const ExpenceIndex = () => {
   const { group_id, event_id } = useParams<Params>();
   const { userCookies } = useContext(LoginUserContext);
   const [event, setEvent] = useState<Event>({} as Event);
   const [expences, setExpences] = useState<Expence[]>([]);
-  const [members, setMembers] = useState<Members[]>([]);
+  const [members, setMembers] = useState<Member[]>([]);
 
   const getEventAndExpence = async () => {
     const result = await axios

@@ -1,10 +1,5 @@
 import axios from "axios";
-
-type UserCookie = {
-  "access-token"?: string;
-  client?: string;
-  uid?: string;
-};
+import { UserCookie } from "../../types/types";
 
 type Props = {
   groupId: number;

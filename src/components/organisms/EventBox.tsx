@@ -1,12 +1,9 @@
 import { Box, Flex, Text } from "@chakra-ui/layout";
 import { useHistory } from "react-router";
+import { Event } from "../../types/types";
 
 type Props = {
-  event: {
-    id: number;
-    title: string;
-    description: string;
-  };
+  event: Event;
   groupId: string;
 };
 

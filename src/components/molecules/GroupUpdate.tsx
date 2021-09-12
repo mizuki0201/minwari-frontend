@@ -12,19 +12,9 @@ import {
 import { useContext, useState } from "react";
 import { updateGroup } from "../../apis/groups/updateGroup";
 import { LoginUserContext } from "../../providers/LoginUserProvider";
+import { Group } from "../../types/types";
 import { EditButton } from "../atoms/EditButton";
 import { FormInput } from "../atoms/FormInput";
-
-type Group = {
-  id: number;
-  name: string;
-  members: [
-    {
-      id: number;
-      name: string;
-    }
-  ];
-};
 
 type Props = {
   group: Group;

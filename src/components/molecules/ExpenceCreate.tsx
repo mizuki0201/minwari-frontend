@@ -14,30 +14,17 @@ import { Radio, RadioGroup } from "@chakra-ui/radio";
 import axios from "axios";
 import { useContext, useState } from "react";
 import { LoginUserContext } from "../../providers/LoginUserProvider";
+import { Expence, Member } from "../../types/types";
 import { CreateButton } from "../atoms/CreateButton";
 import { FormInput } from "../atoms/FormInput";
 import { FormTextarea } from "../atoms/FormTextarea";
-
-type Expence = {
-  id: number;
-  title: string;
-  description: string;
-  price: number;
-  event_id: number;
-  user_id: number;
-};
-
-type Members = {
-  id: number;
-  name: string;
-};
 
 type Props = {
   groupId: string;
   eventId: string;
   expences: Expence[];
   setExpences: React.Dispatch<React.SetStateAction<Expence[]>>;
-  members: Members[];
+  members: Member[];
 };
 
 export const ExpenceCreate = (props: Props) => {

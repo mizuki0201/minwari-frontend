@@ -2,12 +2,7 @@ import { ReactNode } from "react";
 import { createContext } from "react";
 import { useCookies } from "react-cookie";
 import { CookieSetOptions } from "universal-cookie";
-
-type UserCookie = {
-  "access-token"?: string;
-  client?: string;
-  uid?: string;
-};
+import { UserCookie } from "../types/types";
 
 type LoginUserContextType = {
   userCookies?: UserCookie;

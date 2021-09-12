@@ -13,12 +13,8 @@ import {
 import axios from "axios";
 import { useContext, useState } from "react";
 import { LoginUserContext } from "../../providers/LoginUserProvider";
+import { Friend } from "../../types/types";
 
-type Friend = {
-  id: number;
-  user_id: string;
-  name: string;
-};
 export const FriendsIndex = () => {
   const { userCookies } = useContext(LoginUserContext);
   const { isOpen, onOpen, onClose } = useDisclosure();

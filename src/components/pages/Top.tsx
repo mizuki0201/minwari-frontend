@@ -7,17 +7,7 @@ import { LoginUserContext } from "../../providers/LoginUserProvider";
 import { GroupBox } from "../organisms/GroupBox";
 import { Header } from "../organisms/Header";
 import { GroupCreate } from "../molecules/GroupCreate";
-
-type Group = {
-  id: number;
-  name: string;
-  members: [
-    {
-      id: number;
-      name: string;
-    }
-  ];
-};
+import { Group } from "../../types/types";
 
 export const Top = () => {
   const [groups, setGroups] = useState<Group[]>([]);
