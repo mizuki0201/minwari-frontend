@@ -7,7 +7,16 @@ import { Logout } from "../molecules/users/Logout";
 
 export const Header = () => {
   return (
-    <Flex justify="space-between" align="center" px={10} py={4} bg="blue.500">
+    <Flex
+      position="fixed"
+      w="100%"
+      zIndex="100"
+      justify="space-between"
+      align="center"
+      px={10}
+      py={4}
+      bg="blue.500"
+    >
       <Link to="/">
         <Heading as="h1" color="white">
           みんわり

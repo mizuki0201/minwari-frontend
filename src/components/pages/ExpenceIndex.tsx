@@ -41,7 +41,7 @@ export const ExpenceIndex = () => {
   return (
     <>
       <Header />
-      <Box w="100%" h="100vh" p={4} bg="blue.100">
+      <Box w="100%" minH="100vh" p={4} bg="blue.100" pt="85px">
         <Flex
           align="center"
           justifyContent="space-between"

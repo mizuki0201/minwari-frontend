@@ -30,7 +30,7 @@ export const Top = () => {
   return (
     <>
       <Header />
-      <Box h="100vh" w="100vw" bg="blue.100" px={10}>
+      <Box h="100vh" w="100vw" bg="blue.100" px={10} pt="75px">
         <Center py={8} fontSize="2xl" fontWeight="bold">
           グループ一覧
         </Center>

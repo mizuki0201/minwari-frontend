@@ -33,7 +33,7 @@ export const EventsIndex = () => {
   return (
     <>
       <Header />
-      <Flex w="100%" h="100vh" p={4} bg="blue.100">
+      <Flex w="100%" h="100vh" p={4} bg="blue.100" pt="85px">
         <Box w="25%" mr={5}>
           <Flex align="center" justify="space-between" py={4} pl={3}>
             <Text fontSize="xl" fontWeight="bold">
