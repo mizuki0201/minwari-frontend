@@ -6,7 +6,7 @@ import { indexGroups } from "../../apis/groups/indexGroups";
 import { LoginUserContext } from "../../providers/LoginUserProvider";
 import { GroupBox } from "../organisms/GroupBox";
 import { Header } from "../organisms/Header";
-import { GroupCreate } from "../molecules/GroupCreate";
+import { GroupCreate } from "../molecules/groups/GroupCreate";
 import { Group } from "../../types/types";
 
 export const Top = () => {

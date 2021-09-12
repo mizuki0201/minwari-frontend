@@ -1,6 +1,6 @@
 import { Text } from "@chakra-ui/layout";
-import { LoginUserContext } from "../../providers/LoginUserProvider";
-import { logout } from "../../apis/users/logout";
+import { LoginUserContext } from "../../../providers/LoginUserProvider";
+import { logout } from "../../../apis/users/logout";
 import { useContext } from "react";
 import { useHistory } from "react-router-dom";
 

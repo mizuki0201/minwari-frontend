@@ -4,8 +4,8 @@ import { useParams } from "react-router";
 import { indexEvents } from "../../apis/events/indexEvents";
 import { LoginUserContext } from "../../providers/LoginUserProvider";
 import { Event, Group } from "../../types/types";
-import { EventCreate } from "../molecules/EventCreate";
-import { GroupUpdate } from "../molecules/GroupUpdate";
+import { EventCreate } from "../molecules/events/EventCreate";
+import { GroupUpdate } from "../molecules/groups/GroupUpdate";
 import { EventBox } from "../organisms/EventBox";
 import { Header } from "../organisms/Header";
 

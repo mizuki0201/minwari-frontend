@@ -1,7 +1,7 @@
 import { Button } from "@chakra-ui/react";
 import { useState } from "react";
-import { Login } from "../molecules/Login";
-import { Signup } from "../molecules/Signup";
+import { Login } from "../molecules/users/Login";
+import { Signup } from "../molecules/users/Signup";
 
 export const EntranceForm = () => {
   const [loginForm, setLoginForm] = useState(true);

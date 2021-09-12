@@ -12,12 +12,13 @@ import {
 } from "@chakra-ui/modal";
 import { Radio, RadioGroup } from "@chakra-ui/radio";
 import { useContext, useState } from "react";
-import { createExpence } from "../../apis/expences/createExpence";
-import { LoginUserContext } from "../../providers/LoginUserProvider";
-import { Expence, Member } from "../../types/types";
-import { CreateButton } from "../atoms/CreateButton";
-import { FormInput } from "../atoms/FormInput";
-import { FormTextarea } from "../atoms/FormTextarea";
+import { createExpence } from "../../../apis/expences/createExpence";
+import { LoginUserContext } from "../../../providers/LoginUserProvider";
+import { Expence, Member } from "../../../types/types";
+import { CreateButton } from "../../atoms/CreateButton";
+import { FormInput } from "../../atoms/FormInput";
+import { FormNumberInput } from "../../atoms/FormNumberInput";
+import { FormTextarea } from "../../atoms/FormTextarea";
 
 type Props = {
   groupId: string;
@@ -33,14 +34,14 @@ export const ExpenceCreate = (props: Props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [price, setPrice] = useState("");
+  const [price, setPrice] = useState(0);
   const [selectedUser, setSelectedUser] = useState("");
 
   const onCloseModal = () => {
     onClose();
     setTitle("");
     setDescription("");
-    setPrice("");
+    setPrice(0);
   };
 
   const onClickCreateExpence = async () => {
@@ -85,16 +86,15 @@ export const ExpenceCreate = (props: Props) => {
                 placeholder="支出詳細を入力してください"
               />
             </Box>
-            <FormInput
+            <FormNumberInput
               id="price"
               label="支出額"
-              type="text"
               value={price}
               onChange={setPrice}
               placeholder="支出額を入力してください"
             />
             <FormControl my={5} isRequired>
-              <FormLabel>支出者を選択</FormLabel>
+              <FormLabel>支払者を選択</FormLabel>
               <RadioGroup colorScheme="blue" onChange={setSelectedUser}>
                 {members.map((member) => (
                   <Radio key={member.id} value={`${member.id}`} mx={2}>
@@ -102,10 +102,10 @@ export const ExpenceCreate = (props: Props) => {
                   </Radio>
                 ))}
               </RadioGroup>
-              <Button colorScheme="blue" mt={5} onClick={onClickCreateExpence}>
-                支出記録
-              </Button>
             </FormControl>
+            <Button colorScheme="blue" my={5} onClick={onClickCreateExpence}>
+              支出記録
+            </Button>
           </ModalBody>
         </ModalContent>
       </Modal>

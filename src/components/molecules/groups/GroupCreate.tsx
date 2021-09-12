@@ -12,12 +12,12 @@ import {
   ModalOverlay,
 } from "@chakra-ui/modal";
 import { useContext, useState } from "react";
-import { indexFriends } from "../../apis/friends/indexFriends";
-import { createGroup } from "../../apis/groups/createGroup";
-import { LoginUserContext } from "../../providers/LoginUserProvider";
-import { Friend, Group } from "../../types/types";
-import { CreateButton } from "../atoms/CreateButton";
-import { FormInput } from "../atoms/FormInput";
+import { indexFriends } from "../../../apis/friends/indexFriends";
+import { createGroup } from "../../../apis/groups/createGroup";
+import { LoginUserContext } from "../../../providers/LoginUserProvider";
+import { Friend, Group } from "../../../types/types";
+import { CreateButton } from "../../atoms/CreateButton";
+import { FormInput } from "../../atoms/FormInput";
 
 type Props = {
   groups: Group[];

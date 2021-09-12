@@ -17,9 +17,9 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { useContext, useState } from "react";
-import { createFriend } from "../../apis/friends/createFriend";
-import { searchFriend } from "../../apis/friends/searchFriend";
-import { LoginUserContext } from "../../providers/LoginUserProvider";
+import { createFriend } from "../../../apis/friends/createFriend";
+import { searchFriend } from "../../../apis/friends/searchFriend";
+import { LoginUserContext } from "../../../providers/LoginUserProvider";
 
 type User = {
   id?: number;

@@ -11,9 +11,9 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { useContext, useState } from "react";
-import { indexFriends } from "../../apis/friends/indexFriends";
-import { LoginUserContext } from "../../providers/LoginUserProvider";
-import { Friend } from "../../types/types";
+import { indexFriends } from "../../../apis/friends/indexFriends";
+import { LoginUserContext } from "../../../providers/LoginUserProvider";
+import { Friend } from "../../../types/types";
 
 export const FriendsIndex = () => {
   const { userCookies } = useContext(LoginUserContext);

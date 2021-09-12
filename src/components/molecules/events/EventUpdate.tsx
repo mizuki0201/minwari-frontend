@@ -1,6 +1,6 @@
 import { Button } from "@chakra-ui/button";
 import { useDisclosure } from "@chakra-ui/hooks";
-import { Divider } from "@chakra-ui/layout";
+import { Box, Divider } from "@chakra-ui/layout";
 import {
   Modal,
   ModalBody,
@@ -10,11 +10,12 @@ import {
   ModalOverlay,
 } from "@chakra-ui/modal";
 import { useContext, useState } from "react";
-import { updateEvent } from "../../apis/events/updateEvent";
-import { LoginUserContext } from "../../providers/LoginUserProvider";
-import { Event } from "../../types/types";
-import { EditButton } from "../atoms/EditButton";
-import { FormInput } from "../atoms/FormInput";
+import { updateEvent } from "../../../apis/events/updateEvent";
+import { LoginUserContext } from "../../../providers/LoginUserProvider";
+import { Event } from "../../../types/types";
+import { EditButton } from "../../atoms/EditButton";
+import { FormInput } from "../../atoms/FormInput";
+import { FormTextarea } from "../../atoms/FormTextarea";
 
 type Props = {
   groupId: string;
@@ -78,14 +79,15 @@ export const EventUpdate = (props: Props) => {
               onChange={setUpdateTitle}
               placeholder="イベント名を入力してください"
             />
-            <FormInput
-              id="description"
-              label="イベント詳細"
-              type="text"
-              value={updateDescription}
-              onChange={setUpdateDescription}
-              placeholder="イベント詳細を入力してください"
-            />
+            <Box mt={3} mb={5}>
+              <FormTextarea
+                id="description"
+                label="イベント詳細"
+                value={updateDescription}
+                onChange={setUpdateDescription}
+                placeholder="イベント詳細を入力してください"
+              />
+            </Box>
             <Button colorScheme="blue" my={5} onClick={onClickUpdateGroup}>
               イベント更新
             </Button>

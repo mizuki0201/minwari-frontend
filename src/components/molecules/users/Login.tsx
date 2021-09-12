@@ -1,8 +1,8 @@
 import { Button } from "@chakra-ui/react";
 import { useContext, useState } from "react";
-import { LoginUserContext } from "../../providers/LoginUserProvider";
-import { FormInput } from "../atoms/FormInput";
-import { login } from "../../apis/users/login";
+import { LoginUserContext } from "../../../providers/LoginUserProvider";
+import { FormInput } from "../../atoms/FormInput";
+import { login } from "../../../apis/users/login";
 import { useHistory } from "react-router-dom";
 
 export const Login = () => {

@@ -15,7 +15,7 @@ export const FormInput = (props: Props) => {
 
   const onChangeValue = (
     e: React.ChangeEvent<HTMLInputElement>,
-    fn: React.Dispatch<React.SetStateAction<string>>
+    fn: Dispatch<SetStateAction<string>>
   ) => {
     fn(e.target.value);
   };

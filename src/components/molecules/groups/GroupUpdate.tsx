@@ -10,11 +10,11 @@ import {
   ModalOverlay,
 } from "@chakra-ui/modal";
 import { useContext, useState } from "react";
-import { updateGroup } from "../../apis/groups/updateGroup";
-import { LoginUserContext } from "../../providers/LoginUserProvider";
-import { Group } from "../../types/types";
-import { EditButton } from "../atoms/EditButton";
-import { FormInput } from "../atoms/FormInput";
+import { updateGroup } from "../../../apis/groups/updateGroup";
+import { LoginUserContext } from "../../../providers/LoginUserProvider";
+import { Group } from "../../../types/types";
+import { EditButton } from "../../atoms/EditButton";
+import { FormInput } from "../../atoms/FormInput";
 
 type Props = {
   group: Group;

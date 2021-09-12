@@ -4,7 +4,7 @@ import { UserCookie } from "../../types/types";
 type Props = {
   title: string;
   description: string;
-  price: string;
+  price: number;
   eventId: string;
   selectedUser: string;
   groupId: string;

@@ -1,9 +1,9 @@
 import { Flex, Heading } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
-import { FriendSearch } from "../molecules/FriendSearch";
-import { FriendsIndex } from "../molecules/FriendsIndex";
-import { Logout } from "../molecules/Logout";
+import { FriendSearch } from "../molecules/friends/FriendSearch";
+import { FriendsIndex } from "../molecules/friends/FriendsIndex";
+import { Logout } from "../molecules/users/Logout";
 
 export const Header = () => {
   return (

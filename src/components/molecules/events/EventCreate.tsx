@@ -10,12 +10,12 @@ import {
   ModalOverlay,
 } from "@chakra-ui/modal";
 import { useContext, useState } from "react";
-import { createEvent } from "../../apis/events/createEvent";
-import { LoginUserContext } from "../../providers/LoginUserProvider";
-import { Event, Group } from "../../types/types";
-import { CreateButton } from "../atoms/CreateButton";
-import { FormInput } from "../atoms/FormInput";
-import { FormTextarea } from "../atoms/FormTextarea";
+import { createEvent } from "../../../apis/events/createEvent";
+import { LoginUserContext } from "../../../providers/LoginUserProvider";
+import { Event, Group } from "../../../types/types";
+import { CreateButton } from "../../atoms/CreateButton";
+import { FormInput } from "../../atoms/FormInput";
+import { FormTextarea } from "../../atoms/FormTextarea";
 
 type Props = {
   group: Group;

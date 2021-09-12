@@ -1,13 +1,18 @@
 import { Button } from "@chakra-ui/button";
 import { Box, Divider, Flex, Text } from "@chakra-ui/layout";
-import { Expence } from "../../types/types";
+import { Expence, Member } from "../../types/types";
+import { ExpenceUpdate } from "../molecules/expence/ExpenceUpdate";
 
 type Props = {
   expence: Expence;
+  groupId: string;
+  expences: Expence[];
+  setExpences: React.Dispatch<React.SetStateAction<Expence[]>>;
+  members: Member[];
 };
 
 export const ExpenceBox = (props: Props) => {
-  const { expence } = props;
+  const { expence, groupId, expences, setExpences, members } = props;
 
   return (
     <Box
@@ -39,7 +44,9 @@ export const ExpenceBox = (props: Props) => {
       <Flex justify="space-between" align="center">
         <Box>
           <Text fontSize="md">内訳</Text>
-          <Flex fontSize="sm">
+          <Text fontSize="sm">人数で均等に割り勘を行う</Text>
+          {/* 今後は入力式で割勘額を決めれるようにする */}
+          {/* <Flex fontSize="sm">
             <Flex mx={1}>
               <Text mr={2}>user1</Text>
               <Text>100円</Text>
@@ -48,10 +55,17 @@ export const ExpenceBox = (props: Props) => {
               <Text mr={2}>user1</Text>
               <Text>100円</Text>
             </Flex>
-          </Flex>
+          </Flex> */}
         </Box>
         <Box>
-          <Button mr={2} />
+          <ExpenceUpdate
+            groupId={groupId}
+            eventId={expence.event_id}
+            expence={expence}
+            expences={expences}
+            setExpences={setExpences}
+            members={members}
+          />
           <Button />
         </Box>
       </Flex>

@@ -1,10 +1,10 @@
 import { Button } from "@chakra-ui/react";
 import { useContext, useState } from "react";
-import { LoginUserContext } from "../../providers/LoginUserProvider";
-import { signup } from "../../apis/users/signup";
-import { FormInput } from "../atoms/FormInput";
+import { LoginUserContext } from "../../../providers/LoginUserProvider";
+import { signup } from "../../../apis/users/signup";
+import { FormInput } from "../../atoms/FormInput";
 import { useHistory } from "react-router-dom";
-import { login } from "../../apis/users/login";
+import { login } from "../../../apis/users/login";
 
 export const Signup = () => {
   const [name, setName] = useState("");

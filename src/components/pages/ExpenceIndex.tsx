@@ -5,8 +5,8 @@ import { useParams } from "react-router";
 import { indexExpences } from "../../apis/expences/indexExpence";
 import { LoginUserContext } from "../../providers/LoginUserProvider";
 import { Event, Expence, Member } from "../../types/types";
-import { EventUpdate } from "../molecules/EventUpdate";
-import { ExpenceCreate } from "../molecules/ExpenceCreate";
+import { EventUpdate } from "../molecules/events/EventUpdate";
+import { ExpenceCreate } from "../molecules/expence/ExpenceCreate";
 import { ExpenceBox } from "../organisms/ExpenceBox";
 import { Header } from "../organisms/Header";
 
@@ -86,7 +86,14 @@ export const ExpenceIndex = () => {
               支出一覧
             </Center>
             {expences.map((expence) => (
-              <ExpenceBox key={expence.id} expence={expence} />
+              <ExpenceBox
+                key={expence.id}
+                expence={expence}
+                groupId={group_id}
+                expences={expences}
+                setExpences={setExpences}
+                members={members}
+              />
             ))}
           </Box>
         </Flex>
