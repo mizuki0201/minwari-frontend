@@ -75,7 +75,12 @@ export const EventUpdate = (props: Props) => {
             placeholder="イベント詳細を入力してください"
           />
         </Box>
-        <Button colorScheme="blue" my={5} onClick={onClickUpdateGroup}>
+        <Button
+          colorScheme="blue"
+          my={5}
+          disabled={!updateTitle}
+          onClick={onClickUpdateGroup}
+        >
           イベント更新
         </Button>
       </ModalLayout>

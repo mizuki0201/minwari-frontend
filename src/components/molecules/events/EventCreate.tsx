@@ -66,7 +66,12 @@ export const EventCreate = (props: Props) => {
             placeholder="イベント詳細を入力してください"
           />
         </Box>
-        <Button colorScheme="blue" mb={5} onClick={onClickCreateEvent}>
+        <Button
+          colorScheme="blue"
+          mb={5}
+          disabled={!title}
+          onClick={onClickCreateEvent}
+        >
           イベント作成
         </Button>
       </ModalLayout>

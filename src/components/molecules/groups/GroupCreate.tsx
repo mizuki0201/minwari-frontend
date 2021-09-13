@@ -72,7 +72,7 @@ export const GroupCreate = (props: Props) => {
           onChange={setName}
           placeholder="グループ名を入力してください"
         />
-        <FormControl my={5} isRequired>
+        <FormControl my={5}>
           <FormLabel>追加する友達を選択</FormLabel>
           <CheckboxGroup colorScheme="blue">
             <Flex wrap="wrap">
@@ -89,7 +89,12 @@ export const GroupCreate = (props: Props) => {
             </Flex>
           </CheckboxGroup>
         </FormControl>
-        <Button colorScheme="blue" mb={5} onClick={onClickCreateGroup}>
+        <Button
+          colorScheme="blue"
+          mb={5}
+          disabled={!(name !== "" && checkedUser.length !== 0)}
+          onClick={onClickCreateGroup}
+        >
           グループ作成
         </Button>
       </ModalLayout>

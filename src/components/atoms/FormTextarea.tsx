@@ -21,7 +21,7 @@ export const FormTextarea = (props: Props) => {
   };
 
   return (
-    <FormControl id={id} isRequired>
+    <FormControl id={id}>
       <FormLabel>{label}</FormLabel>
       <Textarea
         value={value}

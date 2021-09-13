@@ -96,7 +96,7 @@ export const ExpenceUpdate = (props: Props) => {
           onChange={setUpdatePrice}
           placeholder="支出額を入力してください"
         />
-        <FormControl my={5} isRequired>
+        <FormControl my={5}>
           <FormLabel>支払者を選択</FormLabel>
           <RadioGroup
             colorScheme="blue"
@@ -110,7 +110,18 @@ export const ExpenceUpdate = (props: Props) => {
             ))}
           </RadioGroup>
         </FormControl>
-        <Button colorScheme="blue" my={5} onClick={onClickUpdateExpence}>
+        <Button
+          colorScheme="blue"
+          my={5}
+          disabled={
+            !(
+              updateTitle !== "" &&
+              updatePrice !== 0 &&
+              updateSelectedUser !== ""
+            )
+          }
+          onClick={onClickUpdateExpence}
+        >
           更新
         </Button>
       </ModalLayout>

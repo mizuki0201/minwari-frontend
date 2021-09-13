@@ -28,7 +28,7 @@ export const FormNumberInput = (props: Props) => {
   };
 
   return (
-    <FormControl id={id} isRequired>
+    <FormControl id={id}>
       <FormLabel>{label}</FormLabel>
       <NumberInput value={value}>
         <NumberInputField

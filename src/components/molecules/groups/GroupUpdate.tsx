@@ -53,7 +53,12 @@ export const GroupUpdate = (props: Props) => {
           onChange={setUpdateName}
           placeholder="グループ名を入力してください"
         />
-        <Button colorScheme="blue" my={5} onClick={onClickUpdateGroup}>
+        <Button
+          colorScheme="blue"
+          my={5}
+          disabled={!updateName}
+          onClick={onClickUpdateGroup}
+        >
           グループ更新
         </Button>
       </ModalLayout>

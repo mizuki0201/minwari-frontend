@@ -22,7 +22,7 @@ export const FormInput = (props: Props) => {
 
   return (
     <>
-      <FormControl id={id} isRequired>
+      <FormControl id={id}>
         <FormLabel>{label}</FormLabel>
         <Input
           type={type}

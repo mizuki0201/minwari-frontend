@@ -80,7 +80,7 @@ export const ExpenceCreate = (props: Props) => {
           onChange={setPrice}
           placeholder="支出額を入力してください"
         />
-        <FormControl my={5} isRequired>
+        <FormControl my={5}>
           <FormLabel>支払者を選択</FormLabel>
           <RadioGroup colorScheme="blue" onChange={setSelectedUser}>
             {members.map((member) => (
@@ -90,7 +90,12 @@ export const ExpenceCreate = (props: Props) => {
             ))}
           </RadioGroup>
         </FormControl>
-        <Button colorScheme="blue" my={5} onClick={onClickCreateExpence}>
+        <Button
+          colorScheme="blue"
+          my={5}
+          disabled={!(title !== "" && price !== 0 && selectedUser !== "")}
+          onClick={onClickCreateExpence}
+        >
           支出記録
         </Button>
       </ModalLayout>
