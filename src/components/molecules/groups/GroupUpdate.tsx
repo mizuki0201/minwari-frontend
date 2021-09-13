@@ -1,20 +1,12 @@
 import { Button } from "@chakra-ui/button";
 import { useDisclosure } from "@chakra-ui/hooks";
-import { Divider } from "@chakra-ui/layout";
-import {
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalHeader,
-  ModalOverlay,
-} from "@chakra-ui/modal";
 import { useContext, useState } from "react";
 import { updateGroup } from "../../../apis/groups/updateGroup";
 import { LoginUserContext } from "../../../providers/LoginUserProvider";
 import { Group } from "../../../types/types";
 import { EditButton } from "../../atoms/EditButton";
 import { FormInput } from "../../atoms/FormInput";
+import { ModalLayout } from "../../organisms/ModalLayout";
 
 type Props = {
   group: Group;
@@ -52,27 +44,19 @@ export const GroupUpdate = (props: Props) => {
   return (
     <>
       <EditButton onClick={onOpenModal} />
-      <Modal isOpen={isOpen} onClose={onCloseEdit}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader textAlign="center">グループ更新</ModalHeader>
-          <Divider my={[1, 3, 3, 4]} />
-          <ModalCloseButton _focus={{ boxShadow: "none" }} />
-          <ModalBody>
-            <FormInput
-              id="name"
-              label="グループ名"
-              type="text"
-              value={updateName}
-              onChange={setUpdateName}
-              placeholder="グループ名を入力してください"
-            />
-            <Button colorScheme="blue" my={5} onClick={onClickUpdateGroup}>
-              グループ更新
-            </Button>
-          </ModalBody>
-        </ModalContent>
-      </Modal>
+      <ModalLayout isOpen={isOpen} onClose={onCloseEdit} header="グループ更新">
+        <FormInput
+          id="name"
+          label="グループ名"
+          type="text"
+          value={updateName}
+          onChange={setUpdateName}
+          placeholder="グループ名を入力してください"
+        />
+        <Button colorScheme="blue" my={5} onClick={onClickUpdateGroup}>
+          グループ更新
+        </Button>
+      </ModalLayout>
     </>
   );
 };

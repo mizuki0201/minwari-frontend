@@ -1,15 +1,7 @@
 import { Button } from "@chakra-ui/button";
 import { FormControl, FormLabel } from "@chakra-ui/form-control";
 import { useDisclosure } from "@chakra-ui/hooks";
-import { Box, Divider } from "@chakra-ui/layout";
-import {
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalHeader,
-  ModalOverlay,
-} from "@chakra-ui/modal";
+import { Box } from "@chakra-ui/layout";
 import { Radio, RadioGroup } from "@chakra-ui/radio";
 import { useContext, useState } from "react";
 import { updateExpence } from "../../../apis/expences/updateExpence";
@@ -19,6 +11,7 @@ import { EditButton } from "../../atoms/EditButton";
 import { FormInput } from "../../atoms/FormInput";
 import { FormNumberInput } from "../../atoms/FormNumberInput";
 import { FormTextarea } from "../../atoms/FormTextarea";
+import { ModalLayout } from "../../organisms/ModalLayout";
 
 type Props = {
   groupId: string;
@@ -78,57 +71,49 @@ export const ExpenceUpdate = (props: Props) => {
   return (
     <>
       <EditButton onClick={onOpenModal} />
-      <Modal isOpen={isOpen} onClose={onCloseEdit}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader textAlign="center">支出記録編集</ModalHeader>
-          <Divider my={[1, 3, 3, 4]} />
-          <ModalCloseButton _focus={{ boxShadow: "none" }} />
-          <ModalBody>
-            <FormInput
-              id="title"
-              label="支出名"
-              type="text"
-              value={updateTitle}
-              onChange={setUpdateTitle}
-              placeholder="支出名を入力してください"
-            />
-            <Box my={3}>
-              <FormTextarea
-                id="description"
-                label="支出詳細"
-                value={updateDescription}
-                onChange={setUpdateDescription}
-                placeholder="支出詳細を入力してください"
-              />
-            </Box>
-            <FormNumberInput
-              id="price"
-              label="支出額"
-              value={updatePrice}
-              onChange={setUpdatePrice}
-              placeholder="支出額を入力してください"
-            />
-            <FormControl my={5} isRequired>
-              <FormLabel>支払者を選択</FormLabel>
-              <RadioGroup
-                colorScheme="blue"
-                defaultValue={`${expence.user_id}`}
-                onChange={setUpdateSelectedUser}
-              >
-                {members.map((member) => (
-                  <Radio key={member.id} value={`${member.id}`} mx={2}>
-                    {member.name}
-                  </Radio>
-                ))}
-              </RadioGroup>
-            </FormControl>
-            <Button colorScheme="blue" my={5} onClick={onClickUpdateExpence}>
-              支出記録
-            </Button>
-          </ModalBody>
-        </ModalContent>
-      </Modal>
+      <ModalLayout isOpen={isOpen} onClose={onCloseEdit} header="支出記録編集">
+        <FormInput
+          id="title"
+          label="支出名"
+          type="text"
+          value={updateTitle}
+          onChange={setUpdateTitle}
+          placeholder="支出名を入力してください"
+        />
+        <Box my={3}>
+          <FormTextarea
+            id="description"
+            label="支出詳細"
+            value={updateDescription}
+            onChange={setUpdateDescription}
+            placeholder="支出詳細を入力してください"
+          />
+        </Box>
+        <FormNumberInput
+          id="price"
+          label="支出額"
+          value={updatePrice}
+          onChange={setUpdatePrice}
+          placeholder="支出額を入力してください"
+        />
+        <FormControl my={5} isRequired>
+          <FormLabel>支払者を選択</FormLabel>
+          <RadioGroup
+            colorScheme="blue"
+            defaultValue={`${expence.user_id}`}
+            onChange={setUpdateSelectedUser}
+          >
+            {members.map((member) => (
+              <Radio key={member.id} value={`${member.id}`} mx={2}>
+                {member.name}
+              </Radio>
+            ))}
+          </RadioGroup>
+        </FormControl>
+        <Button colorScheme="blue" my={5} onClick={onClickUpdateExpence}>
+          更新
+        </Button>
+      </ModalLayout>
     </>
   );
 };

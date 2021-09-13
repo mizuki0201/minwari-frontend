@@ -2,17 +2,10 @@ import { SearchIcon } from "@chakra-ui/icons";
 import {
   Box,
   Button,
-  Divider,
   Flex,
   FormControl,
   FormLabel,
   Input,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalHeader,
-  ModalOverlay,
   Text,
   useDisclosure,
 } from "@chakra-ui/react";
@@ -20,6 +13,7 @@ import { useContext, useState } from "react";
 import { createFriend } from "../../../apis/friends/createFriend";
 import { searchFriend } from "../../../apis/friends/searchFriend";
 import { LoginUserContext } from "../../../providers/LoginUserProvider";
+import { ModalLayout } from "../../organisms/ModalLayout";
 
 type User = {
   id?: number;
@@ -83,53 +77,41 @@ export const FriendSearch = () => {
       >
         友達検索
       </Text>
-      <Modal isOpen={isOpen} onClose={onCloseModal}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader textAlign="center">友達検索</ModalHeader>
-          <Divider my={[1, 3, 3, 4]} />
-          <ModalCloseButton _focus={{ boxShadow: "none" }} />
-          <ModalBody>
-            <FormControl id="first-name" mb={5}>
-              <FormLabel>ユーザーIDで検索</FormLabel>
-              <Flex>
-                <Input
-                  value={keyword}
-                  onChange={(e) => onChangeSearchValue(e)}
-                  placeholder="ユーザーIDを入力してください"
-                />
-                <Button
-                  ml={3}
-                  colorScheme="blue"
-                  _focus={{ boxShadow: "none" }}
-                >
-                  <SearchIcon onClick={onClickSearch} />
-                </Button>
-              </Flex>
-              <Box my={7}>
-                {"name" in searchResult ? (
-                  <Flex align="center" justify="space-between">
-                    <Text fontSize="lg">{searchResult.name}</Text>
-                    {added ? (
-                      <Box>{friendStatus}</Box>
-                    ) : (
-                      <Button
-                        colorScheme="blue"
-                        _focus={{ boxShadow: "none" }}
-                        onClick={() => addFriend(searchResult.id)}
-                      >
-                        友達追加
-                      </Button>
-                    )}
-                  </Flex>
+      <ModalLayout isOpen={isOpen} onClose={onCloseModal} header="友達検索">
+        <FormControl id="first-name" mb={5}>
+          <FormLabel>ユーザーIDで検索</FormLabel>
+          <Flex>
+            <Input
+              value={keyword}
+              onChange={(e) => onChangeSearchValue(e)}
+              placeholder="ユーザーIDを入力してください"
+            />
+            <Button ml={3} colorScheme="blue" _focus={{ boxShadow: "none" }}>
+              <SearchIcon onClick={onClickSearch} />
+            </Button>
+          </Flex>
+          <Box my={7}>
+            {"name" in searchResult ? (
+              <Flex align="center" justify="space-between">
+                <Text fontSize="lg">{searchResult.name}</Text>
+                {added ? (
+                  <Box>{friendStatus}</Box>
                 ) : (
-                  <></>
+                  <Button
+                    colorScheme="blue"
+                    _focus={{ boxShadow: "none" }}
+                    onClick={() => addFriend(searchResult.id)}
+                  >
+                    友達追加
+                  </Button>
                 )}
-              </Box>
-            </FormControl>
-          </ModalBody>
-        </ModalContent>
-      </Modal>
+              </Flex>
+            ) : (
+              <></>
+            )}
+          </Box>
+        </FormControl>
+      </ModalLayout>
     </>
   );
 };

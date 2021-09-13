@@ -53,7 +53,7 @@ export const ExpenceDelete = (props: Props) => {
         <ModalContent>
           <ModalHeader>削除確認</ModalHeader>
           <ModalCloseButton />
-          <ModalBody>ほんとうに削除しますか？</ModalBody>
+          <ModalBody>本当に削除しますか？</ModalBody>
           <ModalFooter>
             <Button mr={3} onClick={onClose}>
               閉じる

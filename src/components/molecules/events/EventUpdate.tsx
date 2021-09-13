@@ -1,14 +1,6 @@
 import { Button } from "@chakra-ui/button";
 import { useDisclosure } from "@chakra-ui/hooks";
-import { Box, Divider } from "@chakra-ui/layout";
-import {
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalHeader,
-  ModalOverlay,
-} from "@chakra-ui/modal";
+import { Box } from "@chakra-ui/layout";
 import { useContext, useState } from "react";
 import { updateEvent } from "../../../apis/events/updateEvent";
 import { LoginUserContext } from "../../../providers/LoginUserProvider";
@@ -16,6 +8,7 @@ import { Event } from "../../../types/types";
 import { EditButton } from "../../atoms/EditButton";
 import { FormInput } from "../../atoms/FormInput";
 import { FormTextarea } from "../../atoms/FormTextarea";
+import { ModalLayout } from "../../organisms/ModalLayout";
 
 type Props = {
   groupId: string;
@@ -64,36 +57,28 @@ export const EventUpdate = (props: Props) => {
   return (
     <>
       <EditButton onClick={onOpenModal} />
-      <Modal isOpen={isOpen} onClose={onCloseEdit}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader textAlign="center">イベント更新</ModalHeader>
-          <Divider my={[1, 3, 3, 4]} />
-          <ModalCloseButton _focus={{ boxShadow: "none" }} />
-          <ModalBody>
-            <FormInput
-              id="title"
-              label="イベント名"
-              type="text"
-              value={updateTitle}
-              onChange={setUpdateTitle}
-              placeholder="イベント名を入力してください"
-            />
-            <Box mt={3} mb={5}>
-              <FormTextarea
-                id="description"
-                label="イベント詳細"
-                value={updateDescription}
-                onChange={setUpdateDescription}
-                placeholder="イベント詳細を入力してください"
-              />
-            </Box>
-            <Button colorScheme="blue" my={5} onClick={onClickUpdateGroup}>
-              イベント更新
-            </Button>
-          </ModalBody>
-        </ModalContent>
-      </Modal>
+      <ModalLayout isOpen={isOpen} onClose={onCloseEdit} header="イベント更新">
+        <FormInput
+          id="title"
+          label="イベント名"
+          type="text"
+          value={updateTitle}
+          onChange={setUpdateTitle}
+          placeholder="イベント名を入力してください"
+        />
+        <Box mt={3} mb={5}>
+          <FormTextarea
+            id="description"
+            label="イベント詳細"
+            value={updateDescription}
+            onChange={setUpdateDescription}
+            placeholder="イベント詳細を入力してください"
+          />
+        </Box>
+        <Button colorScheme="blue" my={5} onClick={onClickUpdateGroup}>
+          イベント更新
+        </Button>
+      </ModalLayout>
     </>
   );
 };
