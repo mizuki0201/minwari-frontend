@@ -5,6 +5,7 @@ import { Box } from "@chakra-ui/layout";
 import { Radio, RadioGroup } from "@chakra-ui/radio";
 import { useContext, useState } from "react";
 import { createExpence } from "../../../apis/expences/createExpence";
+import { useMessage } from "../../../hooks/useMessage";
 import { LoginUserContext } from "../../../providers/LoginUserProvider";
 import { Expence, Member } from "../../../types/types";
 import { CreateButton } from "../../atoms/CreateButton";
@@ -29,6 +30,7 @@ export const ExpenceCreate = (props: Props) => {
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState(0);
   const [selectedUser, setSelectedUser] = useState("");
+  const { showMessage } = useMessage();
 
   const onCloseModal = () => {
     onClose();
@@ -50,6 +52,7 @@ export const ExpenceCreate = (props: Props) => {
 
     setExpences([...expences, result]);
     onCloseModal();
+    showMessage({ title: "支出情報を記録しました", status: "success" });
   };
 
   return (

@@ -5,6 +5,7 @@ import { signup } from "../../../apis/users/signup";
 import { FormInput } from "../../atoms/FormInput";
 import { useHistory } from "react-router-dom";
 import { login } from "../../../apis/users/login";
+import { useMessage } from "../../../hooks/useMessage";
 
 export const Signup = () => {
   const [name, setName] = useState("");
@@ -14,6 +15,7 @@ export const Signup = () => {
   const [password, setPassword] = useState("");
   const { setCookie } = useContext(LoginUserContext);
   const history = useHistory();
+  const { showMessage } = useMessage();
 
   const afterRegister = async () => {
     const { headers } = await login({
@@ -36,9 +38,10 @@ export const Signup = () => {
     });
 
     if (status === 200) {
+      showMessage({ title: "ユーザー登録しました", status: "success" });
       afterRegister();
     } else {
-      alert("ユーザー登録に失敗しました");
+      showMessage({ title: "ユーザー登録に失敗しました", status: "error" });
     }
   };
 
@@ -87,6 +90,15 @@ export const Signup = () => {
       <Button
         colorScheme="blue"
         _focus={{ boxShadow: "none" }}
+        disabled={
+          !(
+            name !== "" &&
+            userId !== "" &&
+            email !== "" &&
+            phone !== "" &&
+            password !== ""
+          )
+        }
         onClick={clickOnSignUp}
       >
         新規登録

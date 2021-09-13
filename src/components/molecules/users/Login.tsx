@@ -4,12 +4,14 @@ import { LoginUserContext } from "../../../providers/LoginUserProvider";
 import { FormInput } from "../../atoms/FormInput";
 import { login } from "../../../apis/users/login";
 import { useHistory } from "react-router-dom";
+import { useMessage } from "../../../hooks/useMessage";
 
 export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { setCookie } = useContext(LoginUserContext);
   const history = useHistory();
+  const { showMessage } = useMessage();
 
   const clickOnLogin = async () => {
     const { headers, status } = await login({
@@ -22,8 +24,9 @@ export const Login = () => {
       setCookie("client", headers["client"]);
       setCookie("uid", headers["uid"]);
       history.push("/");
+      showMessage({ title: "ログインしました", status: "success" });
     } else {
-      alert("ログインに失敗しました");
+      showMessage({ title: "ログインに失敗しました", status: "error" });
     }
   };
 
@@ -48,6 +51,7 @@ export const Login = () => {
       <Button
         colorScheme="blue"
         onClick={clickOnLogin}
+        disabled={!(email !== "" && password !== "")}
         _focus={{ boxShadow: "none" }}
       >
         ログイン

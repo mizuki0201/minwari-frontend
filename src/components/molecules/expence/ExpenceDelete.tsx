@@ -14,6 +14,7 @@ import { useContext } from "react";
 import { deleteExpence } from "../../../apis/expences/deleteExpence";
 import { Expence } from "../../../types/types";
 import { DeleteButton } from "../../atoms/DeleteButton";
+import { useMessage } from "../../../hooks/useMessage";
 
 type Props = {
   groupId: string;
@@ -27,6 +28,7 @@ export const ExpenceDelete = (props: Props) => {
   const { groupId, eventId, expenceId, expences, setExpences } = props;
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { userCookies } = useContext(LoginUserContext);
+  const { showMessage } = useMessage();
 
   const onClickDelete = async () => {
     const result = await deleteExpence({
@@ -43,6 +45,7 @@ export const ExpenceDelete = (props: Props) => {
       setExpences(newExpences);
     }
     onClose();
+    showMessage({ title: "支出情報を削除しました", status: "success" });
   };
 
   return (

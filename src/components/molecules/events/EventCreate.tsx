@@ -3,6 +3,7 @@ import { useDisclosure } from "@chakra-ui/hooks";
 import { Box } from "@chakra-ui/layout";
 import { useContext, useState } from "react";
 import { createEvent } from "../../../apis/events/createEvent";
+import { useMessage } from "../../../hooks/useMessage";
 import { LoginUserContext } from "../../../providers/LoginUserProvider";
 import { Event, Group } from "../../../types/types";
 import { CreateButton } from "../../atoms/CreateButton";
@@ -22,6 +23,7 @@ export const EventCreate = (props: Props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const { showMessage } = useMessage();
 
   const onCloseModal = () => {
     onClose();
@@ -39,6 +41,7 @@ export const EventCreate = (props: Props) => {
 
     setEvents([...events, result]);
     onCloseModal();
+    showMessage({ title: "イベントを作成しました", status: "success" });
   };
 
   return (

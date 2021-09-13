@@ -3,6 +3,7 @@ import { useDisclosure } from "@chakra-ui/hooks";
 import { Box } from "@chakra-ui/layout";
 import { useContext, useState } from "react";
 import { updateEvent } from "../../../apis/events/updateEvent";
+import { useMessage } from "../../../hooks/useMessage";
 import { LoginUserContext } from "../../../providers/LoginUserProvider";
 import { Event } from "../../../types/types";
 import { EditButton } from "../../atoms/EditButton";
@@ -22,6 +23,7 @@ export const EventUpdate = (props: Props) => {
   const [updateTitle, setUpdateTitle] = useState("");
   const [updateDescription, setUpdateDescription] = useState("");
   const { userCookies } = useContext(LoginUserContext);
+  const { showMessage } = useMessage();
 
   const onCloseEdit = () => {
     setUpdateTitle("");
@@ -46,6 +48,7 @@ export const EventUpdate = (props: Props) => {
     setUpdateTitle(event.title);
     setUpdateDescription(event.description);
     onClose();
+    showMessage({ title: "イベントを更新しました", status: "success" });
   };
 
   const onOpenModal = () => {

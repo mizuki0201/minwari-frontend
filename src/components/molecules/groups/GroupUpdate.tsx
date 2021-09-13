@@ -2,6 +2,7 @@ import { Button } from "@chakra-ui/button";
 import { useDisclosure } from "@chakra-ui/hooks";
 import { useContext, useState } from "react";
 import { updateGroup } from "../../../apis/groups/updateGroup";
+import { useMessage } from "../../../hooks/useMessage";
 import { LoginUserContext } from "../../../providers/LoginUserProvider";
 import { Group } from "../../../types/types";
 import { EditButton } from "../../atoms/EditButton";
@@ -18,6 +19,7 @@ export const GroupUpdate = (props: Props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [updateName, setUpdateName] = useState("");
   const { userCookies } = useContext(LoginUserContext);
+  const { showMessage } = useMessage();
 
   const onCloseEdit = () => {
     setUpdateName("");
@@ -34,6 +36,7 @@ export const GroupUpdate = (props: Props) => {
     setGroup({ ...group, name: result.name });
     setUpdateName(result.name);
     onClose();
+    showMessage({ title: "グループを更新しました", status: "success" });
   };
 
   const onOpenModal = () => {

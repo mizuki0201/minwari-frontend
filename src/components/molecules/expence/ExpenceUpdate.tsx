@@ -5,6 +5,7 @@ import { Box } from "@chakra-ui/layout";
 import { Radio, RadioGroup } from "@chakra-ui/radio";
 import { useContext, useState } from "react";
 import { updateExpence } from "../../../apis/expences/updateExpence";
+import { useMessage } from "../../../hooks/useMessage";
 import { LoginUserContext } from "../../../providers/LoginUserProvider";
 import { Expence, Member } from "../../../types/types";
 import { EditButton } from "../../atoms/EditButton";
@@ -30,6 +31,7 @@ export const ExpenceUpdate = (props: Props) => {
   const [updatePrice, setUpdatePrice] = useState(0);
   const [updateSelectedUser, setUpdateSelectedUser] = useState("");
   const { userCookies } = useContext(LoginUserContext);
+  const { showMessage } = useMessage();
 
   const onCloseEdit = () => {
     setUpdateTitle("");
@@ -58,6 +60,7 @@ export const ExpenceUpdate = (props: Props) => {
     });
     setExpences(newExpences);
     onClose();
+    showMessage({ title: "支出情報を更新しました", status: "success" });
   };
 
   const onOpenModal = () => {

@@ -6,6 +6,7 @@ import { Flex } from "@chakra-ui/layout";
 import { useContext, useState } from "react";
 import { indexFriends } from "../../../apis/friends/indexFriends";
 import { createGroup } from "../../../apis/groups/createGroup";
+import { useMessage } from "../../../hooks/useMessage";
 import { LoginUserContext } from "../../../providers/LoginUserProvider";
 import { Friend, Group } from "../../../types/types";
 import { CreateButton } from "../../atoms/CreateButton";
@@ -24,6 +25,7 @@ export const GroupCreate = (props: Props) => {
   const [checkedUser, setCheckedUser] = useState<string[]>([]);
   const [friends, setFriends] = useState<Friend[]>([]);
   const { groups, setGroups } = props;
+  const { showMessage } = useMessage();
 
   const onOpenModal = async () => {
     onOpen();
@@ -52,8 +54,8 @@ export const GroupCreate = (props: Props) => {
   const onClickCreateGroup = async () => {
     const result = await createGroup({ name, checkedUser, userCookies });
     setGroups([...groups, result]);
-
     onCloseModal();
+    showMessage({ title: "グループを作成しました", status: "success" });
   };
 
   return (
