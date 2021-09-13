@@ -1,4 +1,3 @@
-import { Button } from "@chakra-ui/button";
 import { Box, Divider, Flex, Text } from "@chakra-ui/layout";
 import { Expence, Member } from "../../types/types";
 import { ExpenceDelete } from "../molecules/expence/ExpenceDelete";
@@ -38,7 +37,7 @@ export const ExpenceBox = (props: Props) => {
           </Text>
         </Box>
         <Text fontSize="lg" fontWeight="bold">
-          {expence.price}円（支払：{expence.user_id}）
+          {expence.price}円（支払：{expence.user_name}）
         </Text>
       </Flex>
       <Divider my={3} />

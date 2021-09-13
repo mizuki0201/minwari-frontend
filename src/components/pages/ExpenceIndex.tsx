@@ -1,8 +1,7 @@
 import { Box, Center, Divider, Flex, Text } from "@chakra-ui/layout";
-import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router";
-import { indexExpences } from "../../apis/expences/indexExpence";
+import { indexExpences } from "../../apis/expences/indexExpences";
 import { LoginUserContext } from "../../providers/LoginUserProvider";
 import { Event, Expence, Member } from "../../types/types";
 import { EventUpdate } from "../molecules/events/EventUpdate";
