@@ -1,46 +1,86 @@
-# Getting Started with Create React App
+# みんわり（アプリ解説編）
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+技術選定・実装振り返り編は[こちら](https://github.com/mizuki0201/minwari-backend)。
 
-## Available Scripts
+## アプリについて
 
-In the project directory, you can run:
+### アプリ概要
 
-### `yarn start`
+本アプリは、友達とグループを作り、その中で割り勘ができるアプリです。
+グループを作り、そのメンバーで出かけたりした際の支払管理を行うことができます。
+また、グループ内でイベントを複数作成できるため、たくさん遊んだりするメンバーでグループを作れば、「次回多めに払ってくれればいいよ〜」といったように、割り勘して支払いが発生した分を次回出かける際などに繰り越すこともできます。
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### URL
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+〜〜〜〜〜〜〜〜
 
-### `yarn test`
+### テスト用アカウント
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+email：
+password：
 
-### `yarn build`
+## アプリ詳細
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 作成動機
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+#### ① 自身の経験から
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+私は、よく一緒に遊ぶ 3 人のグループがあり、そのメンバーでよく遠出もしていました。
+遠出するときには、誰かが代わりに支払い、あとで立て替えするといったことが多々あり、平均して月に 1、2 回くらいは出かけたり遊んだりしていたため、毎回計算をするのがめんどうでした。
+また、どうせこのメンバーは来週も会うのにな、と思いながらも送金アプリでお金を送ることもありました。
 
-### `yarn eject`
+そのような経験から、「一つのグループに対してイベントを複数作成でき、イベント単位での割り勘はもちろん、これまでイベントを合算したグループ単位での割り勘ができ、次のイベントに支払いを持ち越すことができたら便利だな」と思い至りました。
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+割り勘アプリで同じようなものがないか探してみましたが、飲み会の幹事が使うような「1 つのイベント内での割り勘のみ」のアプリが多く、グループごとに複数のイベントを登録できるようなアプリは存在していませんでした。
+また、カップルや夫婦が使いそうな家計管理アプリなども存在はしていましたが、肝心の割り勘機能が存在していないため、こちらも使用することが難しかったです。
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+#### ② 自身の学習のため
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+今後エンジニアを目指すに向けて、これまで学習してきた Ruby on Rails に加え、React を学習してみたいと思ったことから、自身の学習も兼ねてアプリ作成をしようと考えました。
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+以上 2 点の背景から、自分で作成してみようと踏み切りました。
 
-## Learn More
+### 本アプリの特徴
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+本アプリの特徴は、**「グループごとでの割り勘」**ができることです。
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+作成動機でも触れましたが、これまでは飲み会の幹事に役立ちそうな「イベントごと」の割り勘アプリは多数存在しました。
+しかし、「グループごと」の割り勘アプリはあまり普及していないようです。
+グループを作成し、イベントを複数登録できようにしたことで、毎回精算をして支払いを行う必要はなくなります。
+そのため、よく遊ぶ固定の友達がいる場合は、この「グループごと」での割り勘が役に立つのではないかと考えています。
+
+### 本アプリの使い方
+
+まず、メンバーを招待してグループを作成します。
+グループの中で、遊んだ日ごとにイベントが作成できます。
+一つのイベントの中で支出情報を記録し、支出情報を記録するとすぐにイベント内での割り勘した額が・表示されます。
+そのイベントが終わった後に、精算をして支払いを済ませた場合は、その支払いを支出情報として記録します。
+しかし、イベントが終わった後でも、また近々遊ぶ機会がある場合は、その場で支払いはせずに次のイベントに持ち越すことができます。
+2 つ目のイベントを作成し、その中でまた支出情報を記録します。
+そうすることで、イベントの中での割り勘はもちろん、前回までのイベントと合算した「グループ単位」での割り勘をしてくれるため、そのグループ内で誰がどのくらい支払っているかが一目でわかります。
+
+## 課題
+
+### ①UI/UX 設計
+
+本アプリは一般ユーザーがターゲットとなりますが、ターゲットに即したレスポンシブ対応やスマホアプリ版の開発はしませんでした。
+理由としては、このアプリ作成の一番の目的が「自身の学習」であるため、まずは react や rails の学習を優先して開発を進めたためです。
+そのため、PC で確認をすることを前提としてアプリ作成をしており、そこについてはターゲットと仕様の一貫性がないことが課題として挙げられます。
+
+### ②
+
+「作成動機」にも記載しましたが、このアプリは「自身の経験から」作成しました。
+プログラミング学習のために作成したということもあり、自分以外で、世の中にニーズがあるのかを調べたりすることをせずにアプリを作成しました。
+
+実際にユーザーを集めるとなると、そこのニーズ調査からする必要があると考えるため、「そもそもニーズが存在しない（他のアプリで代替可能である）可能性も考えられます。
+
+今回の「学習のため」という理由を除き、アプリ単体で見れば、市場調査の不足が課題として挙げられます。
+
+## 今後の展望
+
+### ① モバイル向けの対応
+
+課題の ① で挙げた通り、今回のターゲットとなる一般ユーザーはスマートフォンでこのアプリを使用することが大多数かと考えられます。
+そのため、最低でもレスポンシブ対応をさせ、スマホでも見やすくすることが必須であり、その後はスマートフォンのアプリを開発することがよりターゲットに即していると考えます。
+
+よって、今後の展望としては、レスポンシブデザインやスマートフォンアプリの開発といった、UI/UX の向上が展望として挙げられます。
