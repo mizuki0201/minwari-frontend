@@ -1,6 +1,7 @@
 import { Button } from "@chakra-ui/button";
 import { Box, Divider, Flex, Text } from "@chakra-ui/layout";
 import { Expence, Member } from "../../types/types";
+import { ExpenceDelete } from "../molecules/expence/ExpenceDelete";
 import { ExpenceUpdate } from "../molecules/expence/ExpenceUpdate";
 
 type Props = {
@@ -57,17 +58,25 @@ export const ExpenceBox = (props: Props) => {
             </Flex>
           </Flex> */}
         </Box>
-        <Box>
-          <ExpenceUpdate
+        <Flex>
+          <Box mr={2}>
+            <ExpenceUpdate
+              groupId={groupId}
+              eventId={expence.event_id}
+              expence={expence}
+              expences={expences}
+              setExpences={setExpences}
+              members={members}
+            />
+          </Box>
+          <ExpenceDelete
             groupId={groupId}
             eventId={expence.event_id}
-            expence={expence}
+            expenceId={expence.id}
             expences={expences}
             setExpences={setExpences}
-            members={members}
           />
-          <Button />
-        </Box>
+        </Flex>
       </Flex>
     </Box>
   );
