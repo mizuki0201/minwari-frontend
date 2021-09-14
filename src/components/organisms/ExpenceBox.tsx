@@ -1,5 +1,5 @@
 import { Box, Divider, Flex, Text } from "@chakra-ui/layout";
-import { Expence, Member } from "../../types/types";
+import { Debt, Expence, Member } from "../../types/types";
 import { ExpenceDelete } from "../molecules/expence/ExpenceDelete";
 import { ExpenceUpdate } from "../molecules/expence/ExpenceUpdate";
 
@@ -8,11 +8,12 @@ type Props = {
   groupId: string;
   expences: Expence[];
   setExpences: React.Dispatch<React.SetStateAction<Expence[]>>;
-  members: Member[];
+  debts: Debt[];
+  setDebts: React.Dispatch<React.SetStateAction<Debt[]>>;
 };
 
 export const ExpenceBox = (props: Props) => {
-  const { expence, groupId, expences, setExpences, members } = props;
+  const { expence, groupId, expences, setExpences, debts, setDebts } = props;
 
   return (
     <Box
@@ -58,7 +59,8 @@ export const ExpenceBox = (props: Props) => {
           </Flex> */}
         </Box>
         <Flex>
-          <Box mr={2}>
+          {/* 更新処理はロジックが一気に複雑になるため、今後実装する */}
+          {/* <Box mr={2}>
             <ExpenceUpdate
               groupId={groupId}
               eventId={expence.event_id}
@@ -67,13 +69,15 @@ export const ExpenceBox = (props: Props) => {
               setExpences={setExpences}
               members={members}
             />
-          </Box>
+          </Box> */}
           <ExpenceDelete
             groupId={groupId}
             eventId={expence.event_id}
             expenceId={expence.id}
             expences={expences}
             setExpences={setExpences}
+            debts={debts}
+            setDebts={setDebts}
           />
         </Flex>
       </Flex>

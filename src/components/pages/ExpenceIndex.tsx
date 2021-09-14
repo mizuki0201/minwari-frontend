@@ -41,7 +41,6 @@ export const ExpenceIndex = () => {
   useEffect(() => {
     const debtsWithUser = calc({ debts, members, expences });
     setDebtsUsers(debtsWithUser);
-    console.log(debtsWithUser);
   }, [debts]);
 
   useEffect(() => {
@@ -102,7 +101,8 @@ export const ExpenceIndex = () => {
                 groupId={group_id}
                 expences={expences}
                 setExpences={setExpences}
-                members={members}
+                debts={debts}
+                setDebts={setDebts}
               />
             ))}
           </Box>

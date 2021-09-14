@@ -54,7 +54,7 @@ export const ExpenceCreate = (props: Props) => {
     });
 
     setExpences([...expences, result.expence]);
-    setDebts([...debts, result.debts]);
+    setDebts([...debts, ...result.debts]);
     onCloseModal();
     showMessage({ title: "支出情報を記録しました", status: "success" });
   };

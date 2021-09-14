@@ -1,9 +1,18 @@
+import { ChevronLeftIcon } from "@chakra-ui/icons";
 import { Box, Center, Divider, Flex, Text } from "@chakra-ui/layout";
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { indexEvents } from "../../apis/events/indexEvents";
+import { useCalc } from "../../hooks/useCalc";
 import { LoginUserContext } from "../../providers/LoginUserProvider";
-import { Event, Group } from "../../types/types";
+import {
+  CalcArray,
+  Debt,
+  Event,
+  Expence,
+  Group,
+  Member,
+} from "../../types/types";
 import { EventCreate } from "../molecules/events/EventCreate";
 import { GroupUpdate } from "../molecules/groups/GroupUpdate";
 import { EventBox } from "../organisms/EventBox";
@@ -18,13 +27,25 @@ export const EventsIndex = () => {
   const { userCookies } = useContext(LoginUserContext);
   const [group, setGroup] = useState<Group>({} as Group);
   const [events, setEvents] = useState<Event[]>([]);
+  const [expences, setExpences] = useState<Expence[]>([]);
+  const [debts, setDebts] = useState<Debt[]>([]);
+  const [debtsUsers, setDebtsUsers] = useState<CalcArray[]>([]);
+  const [members, setMembers] = useState<Member[]>([]);
+  const { calc } = useCalc();
 
   const getGroupAndEvents = async () => {
     const result = await indexEvents({ groupId: group_id, userCookies });
-
     setGroup(result.group);
     setEvents(result.events);
+    setExpences(result.expences);
+    setMembers(result.members);
+    setDebts(result.debts);
   };
+
+  useEffect(() => {
+    const debtsWithUser = calc({ debts, members, expences });
+    setDebtsUsers(debtsWithUser);
+  }, [debts]);
 
   useEffect(() => {
     getGroupAndEvents();
@@ -33,6 +54,7 @@ export const EventsIndex = () => {
   return (
     <>
       <Header />
+      {/* 戻るボタンを実装したい */}
       <Flex w="100%" h="100vh" p={4} bg="blue.100" pt="85px">
         <Box w="25%" mr={5}>
           <Flex align="center" justify="space-between" py={4} pl={3}>
@@ -47,15 +69,15 @@ export const EventsIndex = () => {
               グループ合計の割り勘額
             </Center>
             <Box py={4} px={8}>
-              {group.members?.map((member) => (
+              {debtsUsers.map((debtsUser) => (
                 <Flex
-                  key={member.id}
+                  key={debtsUser.userId}
                   my={2}
                   fontSize="lg"
                   justify="space-between"
                 >
-                  <Text>{member.name}</Text>
-                  <Text>200円</Text>
+                  <Text>{debtsUser.userName}</Text>
+                  <Text>{debtsUser.debtPrice}円</Text>
                 </Flex>
               ))}
             </Box>
