@@ -6,6 +6,7 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton,
+  Text,
 } from "@chakra-ui/react";
 import { useDisclosure } from "@chakra-ui/hooks";
 import { Button } from "@chakra-ui/button";
@@ -56,7 +57,10 @@ export const ExpenceDelete = (props: Props) => {
         <ModalContent>
           <ModalHeader>削除確認</ModalHeader>
           <ModalCloseButton />
-          <ModalBody>本当に削除しますか？</ModalBody>
+          <ModalBody>
+            <Text>付随する割り勘の情報も削除されます。</Text>
+            <Text>本当に削除しますか？</Text>
+          </ModalBody>
           <ModalFooter>
             <Button mr={3} onClick={onClose}>
               閉じる

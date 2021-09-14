@@ -41,3 +41,19 @@ export type Expence = {
   user_id: number;
   user_name: string;
 };
+
+export type Debt = {
+  id: number;
+  price: number;
+  from_id: number;
+  to_id: number;
+  expence_id: number;
+  event_id: number;
+  group_id: number;
+};
+
+export type CalcArray = {
+  debtPrice: number;
+  userId: number;
+  userName: string;
+};

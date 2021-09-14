@@ -7,7 +7,7 @@ import { useContext, useState } from "react";
 import { createExpence } from "../../../apis/expences/createExpence";
 import { useMessage } from "../../../hooks/useMessage";
 import { LoginUserContext } from "../../../providers/LoginUserProvider";
-import { Expence, Member } from "../../../types/types";
+import { Debt, Expence, Member } from "../../../types/types";
 import { CreateButton } from "../../atoms/CreateButton";
 import { FormInput } from "../../atoms/FormInput";
 import { FormNumberInput } from "../../atoms/FormNumberInput";
@@ -19,11 +19,14 @@ type Props = {
   eventId: string;
   expences: Expence[];
   setExpences: React.Dispatch<React.SetStateAction<Expence[]>>;
+  debts: Debt[];
+  setDebts: React.Dispatch<React.SetStateAction<Debt[]>>;
   members: Member[];
 };
 
 export const ExpenceCreate = (props: Props) => {
-  const { groupId, eventId, expences, setExpences, members } = props;
+  const { groupId, eventId, expences, setExpences, debts, setDebts, members } =
+    props;
   const { userCookies } = useContext(LoginUserContext);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [title, setTitle] = useState("");
@@ -50,7 +53,8 @@ export const ExpenceCreate = (props: Props) => {
       userCookies,
     });
 
-    setExpences([...expences, result]);
+    setExpences([...expences, result.expence]);
+    setDebts([...debts, result.debts]);
     onCloseModal();
     showMessage({ title: "支出情報を記録しました", status: "success" });
   };

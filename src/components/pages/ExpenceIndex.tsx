@@ -2,8 +2,9 @@ import { Box, Center, Divider, Flex, Text } from "@chakra-ui/layout";
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { indexExpences } from "../../apis/expences/indexExpences";
+import { useCalc } from "../../hooks/useCalc";
 import { LoginUserContext } from "../../providers/LoginUserProvider";
-import { Event, Expence, Member } from "../../types/types";
+import { CalcArray, Debt, Event, Expence, Member } from "../../types/types";
 import { EventUpdate } from "../molecules/events/EventUpdate";
 import { ExpenceCreate } from "../molecules/expence/ExpenceCreate";
 import { ExpenceBox } from "../organisms/ExpenceBox";
@@ -19,7 +20,10 @@ export const ExpenceIndex = () => {
   const { userCookies } = useContext(LoginUserContext);
   const [event, setEvent] = useState<Event>({} as Event);
   const [expences, setExpences] = useState<Expence[]>([]);
+  const [debts, setDebts] = useState<Debt[]>([]);
+  const [debtsUsers, setDebtsUsers] = useState<CalcArray[]>([]);
   const [members, setMembers] = useState<Member[]>([]);
+  const { calc } = useCalc();
 
   const getEventAndExpence = async () => {
     const result = await indexExpences({
@@ -31,7 +35,14 @@ export const ExpenceIndex = () => {
     setEvent(result.event);
     setExpences(result.expences);
     setMembers(result.members);
+    setDebts(result.debts);
   };
+
+  useEffect(() => {
+    const debtsWithUser = calc({ debts, members, expences });
+    setDebtsUsers(debtsWithUser);
+    console.log(debtsWithUser);
+  }, [debts]);
 
   useEffect(() => {
     getEventAndExpence();
@@ -66,15 +77,15 @@ export const ExpenceIndex = () => {
                 イベント合計の割り勘額
               </Center>
               <Box py={4} px={8}>
-                {members.map((member) => (
+                {debtsUsers.map((debtsUser) => (
                   <Flex
-                    key={member.id}
+                    key={debtsUser.userId}
                     my={2}
                     fontSize="lg"
                     justify="space-between"
                   >
-                    <Text>{member.name}</Text>
-                    <Text>200円</Text>
+                    <Text>{debtsUser.userName}</Text>
+                    <Text>{debtsUser.debtPrice}円</Text>
                   </Flex>
                 ))}
               </Box>
@@ -102,6 +113,8 @@ export const ExpenceIndex = () => {
         eventId={event_id}
         expences={expences}
         setExpences={setExpences}
+        debts={debts}
+        setDebts={setDebts}
         members={members}
       />
     </>
