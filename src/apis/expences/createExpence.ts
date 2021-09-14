@@ -32,6 +32,7 @@ export const createExpence = async (props: Props) => {
           price: price,
           event_id: eventId,
           user_id: selectedUser,
+          group_id: groupId,
         },
       },
       {
