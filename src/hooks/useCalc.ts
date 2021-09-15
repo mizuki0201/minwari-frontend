@@ -3,46 +3,32 @@ import { CalcArray, Debt, Expence, Member } from "../types/types";
 type Props = {
   debts: Debt[];
   members: Member[];
-  expences: Expence[];
 };
 
 export const useCalc = () => {
   const calc = (props: Props) => {
-    const { debts, members, expences } = props;
-    const allCalcResult: CalcArray[] = [];
-    const sumExpences: CalcArray[] = [];
-    const memberNum = members.length;
+    const { debts, members } = props;
+    const calcResult: CalcArray[] = [];
 
     members.map((member) => {
-      let userExpence = 0;
-      expences.map((expence) => {
-        if (expence.user_id === member.id) {
-          let paidExpence =
-            Math.floor(expence.price / memberNum) * (memberNum - 1);
-          userExpence += paidExpence;
+      let userDebt = 0;
+      debts.map((debt) => {
+        if (member.id === debt.from_id) {
+          // お金を払った側
+          userDebt += debt.price;
+        } else if (member.id === debt.to_id) {
+          // 借金した側
+          userDebt -= debt.price;
         }
       });
-      sumExpences.push({
-        debtPrice: userExpence,
+      calcResult.push({
+        debtPrice: userDebt,
         userId: member.id,
         userName: member.name,
       });
     });
 
-    sumExpences.map((sumExpence) => {
-      debts.map((debt) => {
-        if (debt.to_id === sumExpence.userId) {
-          sumExpence.debtPrice -= debt.price;
-        }
-      });
-      allCalcResult.push({
-        debtPrice: sumExpence.debtPrice,
-        userId: sumExpence.userId,
-        userName: sumExpence.userName,
-      });
-    });
-
-    return allCalcResult;
+    return calcResult;
   };
 
   return { calc };

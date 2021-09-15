@@ -5,14 +5,7 @@ import { useParams } from "react-router";
 import { indexEvents } from "../../apis/events/indexEvents";
 import { useCalc } from "../../hooks/useCalc";
 import { LoginUserContext } from "../../providers/LoginUserProvider";
-import {
-  CalcArray,
-  Debt,
-  Event,
-  Expence,
-  Group,
-  Member,
-} from "../../types/types";
+import { CalcArray, Debt, Event, Group, Member } from "../../types/types";
 import { RepaymentButton } from "../atoms/RepaymentButton";
 import { EventCreate } from "../molecules/events/EventCreate";
 import { GroupUpdate } from "../molecules/groups/GroupUpdate";
@@ -28,7 +21,6 @@ export const EventsIndex = () => {
   const { userCookies } = useContext(LoginUserContext);
   const [group, setGroup] = useState<Group>({} as Group);
   const [events, setEvents] = useState<Event[]>([]);
-  const [expences, setExpences] = useState<Expence[]>([]);
   const [debts, setDebts] = useState<Debt[]>([]);
   const [debtsUsers, setDebtsUsers] = useState<CalcArray[]>([]);
   const [members, setMembers] = useState<Member[]>([]);
@@ -38,13 +30,12 @@ export const EventsIndex = () => {
     const result = await indexEvents({ groupId: group_id, userCookies });
     setGroup(result.group);
     setEvents(result.events);
-    setExpences(result.expences);
     setMembers(result.members);
     setDebts(result.debts);
   };
 
   useEffect(() => {
-    const debtsWithUser = calc({ debts, members, expences });
+    const debtsWithUser = calc({ debts, members });
     setDebtsUsers(debtsWithUser);
   }, [debts]);
 
@@ -85,7 +76,10 @@ export const EventsIndex = () => {
                   <Text>{debtsUser.userName}</Text>
                   <Text>{debtsUser.debtPrice}円</Text>
                   {debtsUser.userId == userCookies?.currentUserId ? (
-                    <RepaymentButton onClick={onClickRepayment} />
+                    <RepaymentButton
+                      disabled={debtsUser.debtPrice >= 0}
+                      onClick={onClickRepayment}
+                    />
                   ) : (
                     <Box w="60px" h="40px"></Box>
                   )}

@@ -1,7 +1,9 @@
 import { Box, Divider, Flex, Text } from "@chakra-ui/layout";
-import { Debt, Expence, Member } from "../../types/types";
+import { useContext } from "react";
+import { LoginUserContext } from "../../providers/LoginUserProvider";
+import { Debt, Expence } from "../../types/types";
+import { RepaymentButton } from "../atoms/RepaymentButton";
 import { ExpenceDelete } from "../molecules/expence/ExpenceDelete";
-import { ExpenceUpdate } from "../molecules/expence/ExpenceUpdate";
 
 type Props = {
   expence: Expence;
@@ -14,6 +16,11 @@ type Props = {
 
 export const ExpenceBox = (props: Props) => {
   const { expence, groupId, expences, setExpences, debts, setDebts } = props;
+  const { userCookies } = useContext(LoginUserContext);
+
+  const onClickRepayment = () => {
+    //
+  };
 
   return (
     <Box
@@ -38,7 +45,7 @@ export const ExpenceBox = (props: Props) => {
           </Text>
         </Box>
         <Text fontSize="lg" fontWeight="bold">
-          {expence.price}円（支払：{expence.user_name}）
+          {expence.price}円（支払者：{expence.user_name}）
         </Text>
       </Flex>
       <Divider my={3} />
@@ -59,6 +66,13 @@ export const ExpenceBox = (props: Props) => {
           </Flex> */}
         </Box>
         <Flex>
+          {expence.user_id != userCookies?.currentUserId ? (
+            <Box mr={2}>
+              <RepaymentButton disabled={false} onClick={onClickRepayment} />
+            </Box>
+          ) : (
+            <></>
+          )}
           {/* 更新処理はロジックが一気に複雑になるため、今後実装する */}
           {/* <Box mr={2}>
             <ExpenceUpdate

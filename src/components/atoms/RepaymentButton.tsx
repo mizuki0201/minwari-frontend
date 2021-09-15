@@ -1,11 +1,12 @@
 import { Button } from "@chakra-ui/button";
 
 type Props = {
+  disabled: boolean;
   onClick: () => void;
 };
 
 export const RepaymentButton = (props: Props) => {
-  const { onClick } = props;
+  const { disabled, onClick } = props;
 
   return (
     <Button
@@ -13,6 +14,7 @@ export const RepaymentButton = (props: Props) => {
       h="40px"
       _focus={{ boxShadow: "none" }}
       colorScheme="teal"
+      disabled={disabled}
       onClick={onClick}
     >
       返済

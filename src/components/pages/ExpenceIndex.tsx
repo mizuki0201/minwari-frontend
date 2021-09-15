@@ -5,6 +5,7 @@ import { indexExpences } from "../../apis/expences/indexExpences";
 import { useCalc } from "../../hooks/useCalc";
 import { LoginUserContext } from "../../providers/LoginUserProvider";
 import { CalcArray, Debt, Event, Expence, Member } from "../../types/types";
+import { RepaymentButton } from "../atoms/RepaymentButton";
 import { EventUpdate } from "../molecules/events/EventUpdate";
 import { ExpenceCreate } from "../molecules/expence/ExpenceCreate";
 import { ExpenceBox } from "../organisms/ExpenceBox";
@@ -39,13 +40,17 @@ export const ExpenceIndex = () => {
   };
 
   useEffect(() => {
-    const debtsWithUser = calc({ debts, members, expences });
+    const debtsWithUser = calc({ debts, members });
     setDebtsUsers(debtsWithUser);
   }, [debts]);
 
   useEffect(() => {
     getEventAndExpence();
   }, []);
+
+  const onClickRepayment = () => {
+    //
+  };
 
   return (
     <>
@@ -82,9 +87,18 @@ export const ExpenceIndex = () => {
                     my={2}
                     fontSize="lg"
                     justify="space-between"
+                    align="center"
                   >
                     <Text>{debtsUser.userName}</Text>
                     <Text>{debtsUser.debtPrice}円</Text>
+                    {debtsUser.userId == userCookies?.currentUserId ? (
+                      <RepaymentButton
+                        disabled={debtsUser.debtPrice >= 0}
+                        onClick={onClickRepayment}
+                      />
+                    ) : (
+                      <Box w="60px" h="40px"></Box>
+                    )}
                   </Flex>
                 ))}
               </Box>
