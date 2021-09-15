@@ -16,7 +16,14 @@ type LoginUserContextType = {
     value: any,
     options?: CookieSetOptions | undefined
   ) => void;
-  removeCookie: (name: "access-token" | "client" | "uid") => void;
+  removeCookie: (
+    name:
+      | "access-token"
+      | "client"
+      | "uid"
+      | "currentUserId"
+      | "currentUserName"
+  ) => void;
 };
 
 export const LoginUserContext = createContext<LoginUserContextType>(

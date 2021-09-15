@@ -18,13 +18,15 @@ export const Signup = () => {
   const { showMessage } = useMessage();
 
   const afterRegister = async () => {
-    const { headers } = await login({
+    const { headers, data } = await login({
       email: email,
       password: password,
     });
     setCookie("access-token", headers["access-token"]);
     setCookie("client", headers["client"]);
     setCookie("uid", headers["uid"]);
+    setCookie("currentUserId", data.data.id);
+    setCookie("currentUserName", data.data.name);
     history.push("/");
   };
 

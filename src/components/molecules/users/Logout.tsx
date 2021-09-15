@@ -16,6 +16,8 @@ export const Logout = () => {
       removeCookie("access-token");
       removeCookie("client");
       removeCookie("uid");
+      removeCookie("currentUserId");
+      removeCookie("currentUserName");
       history.push("/entrance");
       showMessage({ title: "ログアウトしました", status: "success" });
     }
