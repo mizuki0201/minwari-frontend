@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
 import { createContext } from "react";
 import { useCookies } from "react-cookie";
 import { CookieSetOptions } from "universal-cookie";
@@ -7,7 +7,12 @@ import { UserCookie } from "../types/types";
 type LoginUserContextType = {
   userCookies?: UserCookie;
   setCookie: (
-    name: "access-token" | "client" | "uid",
+    name:
+      | "access-token"
+      | "client"
+      | "uid"
+      | "currentUserId"
+      | "currentUserName",
     value: any,
     options?: CookieSetOptions | undefined
   ) => void;
@@ -24,10 +29,18 @@ export const LoginUserProvider = (props: { children: ReactNode }) => {
     "access-token",
     "client",
     "uid",
+    "currentUserId",
+    "currentUserName",
   ]);
 
   return (
-    <LoginUserContext.Provider value={{ userCookies, setCookie, removeCookie }}>
+    <LoginUserContext.Provider
+      value={{
+        userCookies,
+        setCookie,
+        removeCookie,
+      }}
+    >
       {children}
     </LoginUserContext.Provider>
   );

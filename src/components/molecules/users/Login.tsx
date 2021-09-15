@@ -14,7 +14,7 @@ export const Login = () => {
   const { showMessage } = useMessage();
 
   const clickOnLogin = async () => {
-    const { headers, status } = await login({
+    const { headers, status, data } = await login({
       email: email,
       password: password,
     });
@@ -23,6 +23,8 @@ export const Login = () => {
       setCookie("access-token", headers["access-token"]);
       setCookie("client", headers["client"]);
       setCookie("uid", headers["uid"]);
+      setCookie("currentUserId", data.data.id);
+      setCookie("currentUserName", data.data.name);
       history.push("/");
       showMessage({ title: "ログインしました", status: "success" });
     } else {

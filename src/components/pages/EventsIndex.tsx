@@ -1,4 +1,4 @@
-import { ChevronLeftIcon } from "@chakra-ui/icons";
+import { Button } from "@chakra-ui/button";
 import { Box, Center, Divider, Flex, Text } from "@chakra-ui/layout";
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router";
@@ -13,6 +13,7 @@ import {
   Group,
   Member,
 } from "../../types/types";
+import { RepaymentButton } from "../atoms/RepaymentButton";
 import { EventCreate } from "../molecules/events/EventCreate";
 import { GroupUpdate } from "../molecules/groups/GroupUpdate";
 import { EventBox } from "../organisms/EventBox";
@@ -51,6 +52,10 @@ export const EventsIndex = () => {
     getGroupAndEvents();
   }, []);
 
+  const onClickRepayment = () => {
+    //
+  };
+
   return (
     <>
       <Header />
@@ -68,16 +73,22 @@ export const EventsIndex = () => {
             <Center fontSize="lg" fontWeight="bold">
               グループ合計の割り勘額
             </Center>
-            <Box py={4} px={8}>
+            <Box p={4}>
               {debtsUsers.map((debtsUser) => (
                 <Flex
                   key={debtsUser.userId}
                   my={2}
                   fontSize="lg"
                   justify="space-between"
+                  align="center"
                 >
                   <Text>{debtsUser.userName}</Text>
                   <Text>{debtsUser.debtPrice}円</Text>
+                  {debtsUser.userId == userCookies?.currentUserId ? (
+                    <RepaymentButton onClick={onClickRepayment} />
+                  ) : (
+                    <Box w="60px" h="40px"></Box>
+                  )}
                 </Flex>
               ))}
             </Box>

@@ -2,6 +2,8 @@ export type UserCookie = {
   "access-token"?: string;
   client?: string;
   uid?: string;
+  currentUserId?: number;
+  currentUserName?: string;
 };
 
 export type Friend = {

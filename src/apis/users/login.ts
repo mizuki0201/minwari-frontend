@@ -14,10 +14,10 @@ export const login = async (props: Props) => {
       password: password,
     })
     .then((res) => {
-      const { headers, status } = res;
-      return { headers, status };
+      const { headers, status, data } = res;
+      return { headers, status, data };
     })
     .catch(() => {
-      return { headers: null, status: 301 };
+      return { headers: null, status: 301, data: {} };
     });
 };
