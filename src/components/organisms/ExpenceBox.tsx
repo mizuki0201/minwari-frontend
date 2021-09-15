@@ -1,6 +1,7 @@
 import { Box, Divider, Flex, Text } from "@chakra-ui/layout";
 import { useContext } from "react";
 import { deleteDebts } from "../../apis/debts/deleteDebts";
+import { useMessage } from "../../hooks/useMessage";
 import { LoginUserContext } from "../../providers/LoginUserProvider";
 import { Debt, Expence } from "../../types/types";
 import { RepaymentButton } from "../atoms/RepaymentButton";
@@ -18,6 +19,7 @@ type Props = {
 export const ExpenceBox = (props: Props) => {
   const { expence, groupId, expences, setExpences, debts, setDebts } = props;
   const { userCookies } = useContext(LoginUserContext);
+  const { showMessage } = useMessage();
 
   const onClickRepayment = async () => {
     const result = await deleteDebts({
@@ -39,7 +41,7 @@ export const ExpenceBox = (props: Props) => {
       });
       setDebts(newDebts);
     } else if (result.status === 302) {
-      alert("すでに返済しています");
+      showMessage({ title: "すでに返済しています", status: "warning" });
     }
   };
 
@@ -75,16 +77,6 @@ export const ExpenceBox = (props: Props) => {
           <Text fontSize="md">内訳</Text>
           <Text fontSize="sm">人数で均等に割り勘を行う</Text>
           {/* 今後は入力式で割勘額を決めれるようにする */}
-          {/* <Flex fontSize="sm">
-            <Flex mx={1}>
-              <Text mr={2}>user1</Text>
-              <Text>100円</Text>
-            </Flex>
-            <Flex mx={1}>
-              <Text mr={2}>user1</Text>
-              <Text>100円</Text>
-            </Flex>
-          </Flex> */}
         </Box>
         <Flex>
           {expence.user_id != userCookies?.currentUserId ? (

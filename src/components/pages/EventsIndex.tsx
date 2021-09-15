@@ -6,9 +6,9 @@ import { indexEvents } from "../../apis/events/indexEvents";
 import { useCalc } from "../../hooks/useCalc";
 import { LoginUserContext } from "../../providers/LoginUserProvider";
 import { CalcArray, Debt, Event, Group, Member } from "../../types/types";
-import { RepaymentButton } from "../atoms/RepaymentButton";
 import { EventCreate } from "../molecules/events/EventCreate";
 import { GroupUpdate } from "../molecules/groups/GroupUpdate";
+import { DebtsForUsers } from "../organisms/DebtsForUsers";
 import { EventBox } from "../organisms/EventBox";
 import { Header } from "../organisms/Header";
 
@@ -82,28 +82,7 @@ export const EventsIndex = () => {
             <Center fontSize="lg" fontWeight="bold">
               グループ合計の割り勘額
             </Center>
-            <Box p={4}>
-              {debtsUsers.map((debtsUser) => (
-                <Flex
-                  key={debtsUser.userId}
-                  my={2}
-                  fontSize="lg"
-                  justify="space-between"
-                  align="center"
-                >
-                  <Text>{debtsUser.userName}</Text>
-                  <Text>{debtsUser.debtPrice}円</Text>
-                  {debtsUser.userId == userCookies?.currentUserId ? (
-                    <RepaymentButton
-                      disabled={debtsUser.debtPrice >= 0}
-                      onClick={onClickRepayment}
-                    />
-                  ) : (
-                    <Box w="60px" h="40px"></Box>
-                  )}
-                </Flex>
-              ))}
-            </Box>
+            <DebtsForUsers debtsUsers={debtsUsers} onClick={onClickRepayment} />
           </Box>
         </Box>
         <Box w="75%" p={5}>
