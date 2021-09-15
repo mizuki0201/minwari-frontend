@@ -1,4 +1,4 @@
-import { CalcArray, Debt, Expence, Member } from "../types/types";
+import { CalcArray, Debt, Member } from "../types/types";
 
 type Props = {
   debts: Debt[];

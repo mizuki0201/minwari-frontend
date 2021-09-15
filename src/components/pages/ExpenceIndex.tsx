@@ -1,6 +1,7 @@
 import { Box, Center, Divider, Flex, Text } from "@chakra-ui/layout";
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router";
+import { deleteDebts } from "../../apis/debts/deleteDebts";
 import { indexExpences } from "../../apis/expences/indexExpences";
 import { useCalc } from "../../hooks/useCalc";
 import { LoginUserContext } from "../../providers/LoginUserProvider";
@@ -48,8 +49,26 @@ export const ExpenceIndex = () => {
     getEventAndExpence();
   }, []);
 
-  const onClickRepayment = () => {
-    //
+  const onClickRepayment = async () => {
+    const result = await deleteDebts({
+      event_id: event.id,
+      user_id: userCookies?.currentUserId,
+      userCookies,
+    });
+
+    if (result.status === 200) {
+      const newDebts = debts.filter((debt) => {
+        if (
+          !(
+            debt.event_id === event.id &&
+            debt.to_id == userCookies?.currentUserId
+          )
+        ) {
+          return debt;
+        }
+      });
+      setDebts(newDebts);
+    }
   };
 
   return (

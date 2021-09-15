@@ -69,7 +69,7 @@ export const ExpenceDelete = (props: Props) => {
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>削除確認</ModalHeader>
-          <ModalCloseButton />
+          <ModalCloseButton _focus={{ boxShadow: "none" }} />
           <ModalBody>
             <Text>付随する割り勘の情報も削除されます。</Text>
             <Text>本当に削除しますか？</Text>

@@ -1,5 +1,6 @@
 import { Box, Divider, Flex, Text } from "@chakra-ui/layout";
 import { useContext } from "react";
+import { deleteDebts } from "../../apis/debts/deleteDebts";
 import { LoginUserContext } from "../../providers/LoginUserProvider";
 import { Debt, Expence } from "../../types/types";
 import { RepaymentButton } from "../atoms/RepaymentButton";
@@ -18,8 +19,28 @@ export const ExpenceBox = (props: Props) => {
   const { expence, groupId, expences, setExpences, debts, setDebts } = props;
   const { userCookies } = useContext(LoginUserContext);
 
-  const onClickRepayment = () => {
-    //
+  const onClickRepayment = async () => {
+    const result = await deleteDebts({
+      expence_id: expence.id,
+      user_id: userCookies?.currentUserId,
+      userCookies,
+    });
+
+    if (result.status === 200) {
+      const newDebts = debts.filter((debt) => {
+        if (
+          !(
+            debt.expence_id === expence.id &&
+            debt.to_id == userCookies?.currentUserId
+          )
+        ) {
+          return debt;
+        }
+      });
+      setDebts(newDebts);
+    } else if (result.status === 302) {
+      alert("すでに返済しています");
+    }
   };
 
   return (

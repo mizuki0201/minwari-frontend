@@ -1,7 +1,7 @@
-import { Button } from "@chakra-ui/button";
 import { Box, Center, Divider, Flex, Text } from "@chakra-ui/layout";
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router";
+import { deleteDebts } from "../../apis/debts/deleteDebts";
 import { indexEvents } from "../../apis/events/indexEvents";
 import { useCalc } from "../../hooks/useCalc";
 import { LoginUserContext } from "../../providers/LoginUserProvider";
@@ -43,8 +43,26 @@ export const EventsIndex = () => {
     getGroupAndEvents();
   }, []);
 
-  const onClickRepayment = () => {
-    //
+  const onClickRepayment = async () => {
+    const result = await deleteDebts({
+      group_id: group.id,
+      user_id: userCookies?.currentUserId,
+      userCookies,
+    });
+
+    if (result.status === 200) {
+      const newDebts = debts.filter((debt) => {
+        if (
+          !(
+            debt.group_id === group.id &&
+            debt.to_id == userCookies?.currentUserId
+          )
+        ) {
+          return debt;
+        }
+      });
+      setDebts(newDebts);
+    }
   };
 
   return (
