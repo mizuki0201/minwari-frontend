@@ -17,6 +17,7 @@ export const EntranceForm = () => {
         colorScheme="blue"
         variant="link"
         size="sm"
+        _focus={{ boxShadow: "none" }}
         onClick={switchLoginOrSignUp}
       >
         新規登録はこちら
@@ -29,6 +30,7 @@ export const EntranceForm = () => {
         colorScheme="blue"
         variant="link"
         size="sm"
+        _focus={{ boxShadow: "none" }}
         onClick={switchLoginOrSignUp}
       >
         ログインはこちら
