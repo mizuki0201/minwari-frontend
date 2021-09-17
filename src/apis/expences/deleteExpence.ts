@@ -13,7 +13,7 @@ export const deleteExpence = (props: Props) => {
 
   const result = axios
     .delete(
-      `http://localhost:3001/api/v1/groups/${groupId}/events/${eventId}/expences/${expenceId}`,
+      `${process.env.REACT_APP_API_ENDPOINT}/api/v1/groups/${groupId}/events/${eventId}/expences/${expenceId}`,
       {
         headers: userCookies,
       }

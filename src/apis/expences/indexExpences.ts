@@ -12,7 +12,7 @@ export const indexExpences = async (props: Props) => {
 
   const result = await axios
     .get(
-      `http://localhost:3001/api/v1/groups/${groupId}/events/${eventId}/expences`,
+      `${process.env.REACT_APP_API_ENDPOINT}/api/v1/groups/${groupId}/events/${eventId}/expences`,
       {
         headers: userCookies,
       }

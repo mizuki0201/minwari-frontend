@@ -27,7 +27,9 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build-development": "dotenv -e .env react-scripts build",
+    "build-staging": "dotenv -e .env react-scripts build",
+    "build-production": "dotenv -e .env.production react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -51,6 +53,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^9.8.6",
+    "dotenv-cli": "^4.0.0",
     "postcss": "^7.0.36"
   }
 }

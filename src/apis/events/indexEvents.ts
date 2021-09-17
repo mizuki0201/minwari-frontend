@@ -10,9 +10,12 @@ export const indexEvents = async (props: Props) => {
   const { groupId, userCookies } = props;
 
   const result = await axios
-    .get(`http://localhost:3001/api/v1/groups/${groupId}/events`, {
-      headers: userCookies,
-    })
+    .get(
+      `${process.env.REACT_APP_API_ENDPOINT}/api/v1/groups/${groupId}/events`,
+      {
+        headers: userCookies,
+      }
+    )
     .then((res) => {
       return res.data;
     });

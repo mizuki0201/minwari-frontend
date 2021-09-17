@@ -12,7 +12,7 @@ export const signup = async (props: Props) => {
   const { name, email, phone, userId, password } = props;
 
   return await axios
-    .post("http://localhost:3001/api/v1/auth", {
+    .post(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/auth`, {
       user: {
         name: name,
         email: email,

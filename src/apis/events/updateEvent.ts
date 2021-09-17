@@ -15,7 +15,7 @@ export const updateEvent = async (props: Props) => {
 
   const result = await axios
     .put(
-      `http://localhost:3001/api/v1/groups/${groupId}/events/${eventId}`,
+      `${process.env.REACT_APP_API_ENDPOINT}/api/v1/groups/${groupId}/events/${eventId}`,
       {
         event: {
           title: updateTitle,

@@ -10,7 +10,7 @@ export const createFriend = async (props: Props) => {
   const { to_id, userCookies } = props;
   const result = await axios
     .post(
-      "http://localhost:3001/api/v1/friends",
+      `${process.env.REACT_APP_API_ENDPOINT}/api/v1/friends`,
       {
         friend: {
           to_id,

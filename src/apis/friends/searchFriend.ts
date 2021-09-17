@@ -9,7 +9,7 @@ type Props = {
 export const searchFriend = async (props: Props) => {
   const { keyword, userCookies } = props;
   const result = await axios
-    .get("http://localhost:3001/api/v1/users", {
+    .get(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/users`, {
       params: {
         keyword: keyword,
       },

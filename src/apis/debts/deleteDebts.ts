@@ -13,7 +13,7 @@ export const deleteDebts = async (props: Props) => {
   const { expence_id, event_id, group_id, userCookies } = props;
 
   const result = axios
-    .delete("http://localhost:3001/api/v1/debts", {
+    .delete(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/debts`, {
       params: {
         expence_id: expence_id,
         event_id: event_id,

@@ -3,7 +3,7 @@ import { UserCookie } from "../../types/types";
 
 export const indexGroups = async (userCookies: UserCookie | undefined) => {
   return await axios
-    .get("http://localhost:3001/api/v1/groups", {
+    .get(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/groups`, {
       headers: userCookies,
     })
     .then((res) => {
