@@ -1,7 +1,6 @@
 {
   "name": "minwari-frontend",
   "version": "0.1.0",
-  "homepage": "./",
   "private": true,
   "dependencies": {
     "@chakra-ui/icons": "^1.0.15",
@@ -55,6 +54,7 @@
   "devDependencies": {
     "autoprefixer": "^9.8.6",
     "dotenv-cli": "^4.0.0",
-    "postcss": "^7.0.36"
+    "postcss": "^7.0.36",
+    "webpack-pwa-manifest": "^4.3.0"
   }
 }
