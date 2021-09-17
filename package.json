@@ -17,6 +17,7 @@
     "@types/react-dom": "^17.0.0",
     "@types/react-router-dom": "^5.1.8",
     "axios": "^0.21.1",
+    "dotenv-cli": "^4.0.0",
     "framer-motion": "^4",
     "react": "^17.0.2",
     "react-cookie": "^4.1.1",
@@ -54,7 +55,6 @@
   },
   "devDependencies": {
     "autoprefixer": "^9.8.6",
-    "dotenv-cli": "^4.0.0",
     "postcss": "^7.0.36"
   }
 }
