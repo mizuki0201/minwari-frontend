@@ -1,6 +1,7 @@
 {
   "name": "minwari-frontend",
   "version": "0.1.0",
+  "homepage": "./",
   "private": true,
   "dependencies": {
     "@chakra-ui/icons": "^1.0.15",
