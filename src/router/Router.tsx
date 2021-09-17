@@ -21,6 +21,9 @@ export const Router = () => {
         <Route exact path="/groups/:group_id/events/:event_id">
           <ExpenceIndex />
         </Route>
+        <Route>
+          <Top />
+        </Route>
       </LoginUserProvider>
     </Switch>
   );
