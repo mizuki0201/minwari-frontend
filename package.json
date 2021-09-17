@@ -54,6 +54,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^9.8.6",
-    "dotenv-cli": "^4.0.0"
+    "dotenv-cli": "^4.0.0",
+    "postcss": "^7.0.36"
   }
 }
