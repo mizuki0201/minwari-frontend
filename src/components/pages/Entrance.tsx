@@ -2,6 +2,7 @@ import { Box, Divider, Flex, Heading, Stack } from "@chakra-ui/react";
 import { EntranceForm } from "../organisms/EntranceForm";
 
 export const Entrance = () => {
+  console.log(process.env);
   console.log(process.env.REACT_APP_API_ENDPOINT);
   return (
     <Flex align="center" justify="center" height="100vh" bg="blue.100">
