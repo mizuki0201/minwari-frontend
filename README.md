@@ -12,12 +12,12 @@
 
 ### URL
 
-〜〜〜〜〜〜〜〜
+[https://minwari.netlify.app/](https://minwari.netlify.app/)
 
 ### テスト用アカウント
 
-email：  
-password：
+email：test@gmail.com  
+password：password
 
 ## アプリ詳細
 
