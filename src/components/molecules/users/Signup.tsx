@@ -55,7 +55,7 @@ export const Signup = () => {
         type="text"
         value={name}
         onChange={setName}
-        placeholder="名前を入力してください"
+        placeholder="名前を入力してください（50文字以内）"
       />
       <FormInput
         id="user_id"

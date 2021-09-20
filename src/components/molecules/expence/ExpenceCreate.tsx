@@ -69,7 +69,7 @@ export const ExpenceCreate = (props: Props) => {
           type="text"
           value={title}
           onChange={setTitle}
-          placeholder="支出名を入力してください"
+          placeholder="支出名を入力してください（50文字以内）"
         />
         <Box my={3}>
           <FormTextarea
@@ -77,7 +77,7 @@ export const ExpenceCreate = (props: Props) => {
             label="支出詳細"
             value={description}
             onChange={setDescription}
-            placeholder="支出詳細を入力してください"
+            placeholder="支出詳細を入力してください（100文字以内）"
           />
         </Box>
         <FormNumberInput

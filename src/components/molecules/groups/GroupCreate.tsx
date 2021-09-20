@@ -72,7 +72,7 @@ export const GroupCreate = (props: Props) => {
           type="text"
           value={name}
           onChange={setName}
-          placeholder="グループ名を入力してください"
+          placeholder="グループ名を入力してください（50文字以内）"
         />
         <FormControl my={5}>
           <FormLabel>追加する友達を選択</FormLabel>

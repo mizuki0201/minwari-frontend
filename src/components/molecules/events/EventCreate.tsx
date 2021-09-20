@@ -58,7 +58,7 @@ export const EventCreate = (props: Props) => {
           type="text"
           value={title}
           onChange={setTitle}
-          placeholder="イベント名を入力してください"
+          placeholder="イベント名を入力してください（50文字以内）"
         />
         <Box mt={3} mb={5}>
           <FormTextarea
@@ -66,7 +66,7 @@ export const EventCreate = (props: Props) => {
             label="イベント詳細"
             value={description}
             onChange={setDescription}
-            placeholder="イベント詳細を入力してください"
+            placeholder="イベント詳細を入力してください（100文字以内）"
           />
         </Box>
         <Button
