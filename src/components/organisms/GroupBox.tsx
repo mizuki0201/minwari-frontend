@@ -25,14 +25,14 @@ export const GroupBox = (props: Group) => {
       <Text mb={2} fontSize="lg" fontWeight="bold">
         {name}
       </Text>
-      <Text>
+      <Box>
         メンバー：
         {members?.map((member) => (
           <Text key={member.id} display="inline" mr={2}>
             {member.name}
           </Text>
         ))}
-      </Text>
+      </Box>
     </Box>
   );
 };
