@@ -13,6 +13,7 @@
 ### URL
 
 [https://minwari.netlify.app/](https://minwari.netlify.app/)
+※現在は停止しています
 
 ### テスト用アカウント
 
